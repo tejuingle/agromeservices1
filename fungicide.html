@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fungicides | AgroMe</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="category.css" />
+</head>
+<body>
+  <div id="header-container">
+    <div id="header"></div>
+    <script>
+      fetch('header.html')
+        .then(res => res.text())
+        .then(data => { document.getElementById('header').innerHTML = data; });
+    </script>
+  </div>
+
+  <main class="main-content">
+    <div class="content-container">
+      <section class="category-section">
+        <div class="category-header">
+          <img src="projectimages/fungicide.jpg" alt="Fungicides" class="category-image"/>
+          <h1 class="category-title">Fungicides</h1>
+        </div>
+        <div class="category-filter">
+          <h3>Filter By</h3>
+          <div class="filter-section">
+            <h4>Categories</h4>
+            <ul class="category-list">
+              <li class="active"><a href="fungicide.html"><i class="fas fa-seedling"></i> Fungicides</a></li>
+              <li><a href="insecticide.html"><i class="fas fa-bug"></i> Insecticides</a></li>
+              <li><a href="herbicide.html"><i class="fas fa-leaf"></i> Herbicides</a></li>
+              <li><a href="seed.html"><i class="fas fa-spa"></i> Seeds</a></li>
+              <li><a href="plantgrowth.html"><i class="fas fa-chart-line"></i> Plant Growth</a></li>
+              <li><a href="shopbybrand.html"><i class="fas fa-tags"></i> Shop By Brand</a></li>
+            </ul>
+          </div>
+          <div class="filter-section">
+            <h4>Price Range</h4>
+            <div class="price-range">
+              <input type="range" min="0" max="5000" value="5000" class="slider" id="priceRange"/>
+              <div class="price-values">
+                <span>₹0</span>
+                <span>₹5000</span>
+              </div>
+            </div>
+          </div>
+          <div class="filter-section">
+            <h4>Brand</h4>
+            <div class="brand-filter">
+              <label><input type="checkbox" checked /> All Brands</label>
+              <label><input type="checkbox" /> Bayer</label>
+              <label><input type="checkbox" /> Syngenta</label>
+              <label><input type="checkbox" /> UPL</label>
+              <label><input type="checkbox" /> Indofil</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-display-section">
+        <div class="product-sorting">
+          <span>Sort By:</span>
+          <select id="sortOptions">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="discount">Best Discount</option>
+            <option value="rating">Customer Rating</option>
+          </select>
+          <div class="product-count">
+            Showing <span id="showingCount">0</span> of <span id="totalCount">0</span> products
+          </div>
+        </div>
+
+        <div id="featured-products-container" class="product-container"></div>
+
+        <div class="pagination">
+          <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+          <span class="current-page">1</span>
+          <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-container"></div>
+  <script>
+    fetch('footer.html')
+      .then(res => res.text())
+      .then(data => { document.getElementById('footer-container').innerHTML = data; });
+  </script>
+
+  <script type="module">
+    import { products } from './data1/data.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('featured-products-container');
+      const sortSelect = document.getElementById('sortOptions');
+      const priceRange = document.getElementById('priceRange');
+      const showingCount = document.getElementById('showingCount');
+      const totalCount = document.getElementById('totalCount');
+
+      let filteredProducts = products.filter(p => p.category === "Fungicide");
+      totalCount.textContent = filteredProducts.length;
+
+      function renderProducts(list) {
+        container.innerHTML = '';
+        showingCount.textContent = list.length;
+
+        list.forEach(product => {
+          const discount = product.originalPrice * (product.discountPercentage / 100);
+          const finalPrice = product.originalPrice - discount;
+          const stars = '★'.repeat(product.rating) + '☆'.repeat(5 - product.rating);
+
+          const item = document.createElement('div');
+          item.className = 'product-item';
+          item.innerHTML = `
+            <div class="product-image-container">
+              <img src="${product.imageSrc}" alt="${product.name}" loading="lazy">
+              ${product.discountPercentage > 0 ? `<div class="discount-badge">${product.discountPercentage}% OFF</div>` : ''}
+              <div class="quick-view-btn">Quick View</div>
+            </div>
+            <div class="product-details">
+              <h3>${product.name}</h3>
+              <p class="brand-name">${product.brandName}</p>
+              <div class="product-rating">
+                <span class="stars">${stars}</span>
+                <span class="rating-count">(${product.ratingCount})</span>
+              </div>
+              <div class="price-container">
+                ${product.discountPercentage > 0 ? `<span class="original-price">₹${product.originalPrice.toFixed(2)}</span>` : ''}
+                <span class="discounted-price">₹${finalPrice.toFixed(2)}</span>
+              </div>
+            </div>
+          `;
+          item.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('quick-view-btn')) {
+              window.location.href = `product.html?id=${product.id}`;
+            }
+          });
+          item.querySelector('.quick-view-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            showQuickView(product);
+          });
+          container.appendChild(item);
+        });
+      }
+
+      renderProducts(filteredProducts);
+
+      sortSelect.addEventListener('change', () => {
+        const value = sortSelect.value;
+        let sorted = [...filteredProducts];
+        switch (value) {
+          case 'price-low':
+            sorted.sort((a, b) => (a.originalPrice * (1 - a.discountPercentage / 100)) - (b.originalPrice * (1 - b.discountPercentage / 100)));
+            break;
+          case 'price-high':
+            sorted.sort((a, b) => (b.originalPrice * (1 - b.discountPercentage / 100)) - (a.originalPrice * (1 - a.discountPercentage / 100)));
+            break;
+          case 'discount':
+            sorted.sort((a, b) => b.discountPercentage - a.discountPercentage);
+            break;
+          case 'rating':
+            sorted.sort((a, b) => b.rating - a.rating);
+            break;
+        }
+        renderProducts(sorted);
+      });
+
+      priceRange.addEventListener('input', () => {
+        const max = parseInt(priceRange.value);
+        const priced = filteredProducts.filter(p => (p.originalPrice * (1 - p.discountPercentage / 100)) <= max);
+        renderProducts(priced);
+      });
+
+      function showQuickView(product) {
+        const discount = product.originalPrice * (product.discountPercentage / 100);
+        const finalPrice = product.originalPrice - discount;
+        const stars = '★'.repeat(product.rating) + '☆'.repeat(5 - product.rating);
+
+        const modal = document.createElement('div');
+        modal.className = 'quick-view-modal';
+        modal.innerHTML = `
+          <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-product">
+              <div class="modal-image">
+                <img src="${product.imageSrc}" alt="${product.name}">
+              </div>
+              <div class="modal-details">
+                <h2>${product.name}</h2>
+                <p class="brand">Brand: ${product.brandName}</p>
+                <div class="rating">${stars} <span>(${product.ratingCount})</span></div>
+                <div class="price">
+                  <span class="current">₹${finalPrice.toFixed(2)}</span>
+                  ${product.discountPercentage ? `<span class="original">₹${product.originalPrice.toFixed(2)}</span> <span class="discount">${product.discountPercentage}% OFF</span>` : ''}
+                </div>
+                <div class="description">
+                  <h3>Description</h3>
+                  <p>${product.description || 'No description available.'}</p>
+                </div>
+                <div class="actions">
+                  <button class="buy-now">Buy Now</button>
+                </div>
+              </div>
+            </div>
+          </div>`;
+        document.body.appendChild(modal);
+        modal.querySelector('.close-modal').onclick = () => modal.remove();
+        modal.querySelector('.buy-now').onclick = () => alert(`Buying: ${product.name}`);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroME - Shop by Brand</title>
+    <link rel="icon" href="projectimages/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Shop by Brand Section Styling */
+        .shopbybrand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .brand-title {
+            color: #556b2f;
+            font-size: 28px;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .brand-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #556b2f;
+            margin: 10px auto;
+        }
+
+        .search-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        #brand-search {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #brand-search:focus {
+            border-color: #556b2f;
+            box-shadow: 0 0 5px rgba(85, 107, 47, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #556b2f;
+            font-size: 14px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            width: 200%;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #556b2f;
+            color: white;
+        }
+
+        .sbb {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .brand {
+            width: 150px;
+            text-align: center;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .brand-image {
+            width: 120%;
+            height: 100px;
+            object-fit: contain;
+            border-radius: 5px;
+        }
+
+        .brand-name {
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .brand:hover {
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            display: none;
+            width: 100%;
+        }
+
+        .no-results i {
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: #556b2f;
+        }
+
+        .loader {
+            display: none;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #556b2f;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .brand {
+                width: 100px;
+                padding: 8px;
+            }
+            
+            .brand-image {
+                height: 70px;
+            }
+            
+            .brand-name {
+                font-size: 11px;
+            }
+            
+            .filter-btn {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand {
+                width: 85px;
+            }
+            
+            .brand-image {
+                height: 60px;
+            }
+            
+            .search-container {
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <!-- Shop by Brand Section -->
+    <section class="shopbybrand">
+        <h3 class="brand-title">Shop by Brand</h3>
+        
+        <!-- Search Box -->
+        <div class="search-container">
+            <input type="text" id="brand-search" placeholder="Search brands...">
+            <i class="fas fa-search search-icon"></i>
+        </div>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="seeds">Seeds</button>
+            <button class="filter-btn" data-filter="pesticides">Pesticides</button>
+            <button class="filter-btn" data-filter="fertilizers">Fertilizers</button>
+        </div>
+        
+        <!-- Loading Animation -->
+        <div class="loader" id="loader"></div>
+        
+        <!-- No Results Message -->
+        <div class="no-results" id="no-results">
+            <i class="fas fa-search"></i>
+            <h3>No Brands Found</h3>
+            <p>Try adjusting your search or filter</p>
+        </div>
+        
+        <!-- Brands Container -->
+        <div class="sbb" id="brands-container">
+            <!-- Bayer Brand -->
+            <div class="brand" data-category="pesticides" data-name="bayer">
+                <a href="bayerbrand.html">
+                    <img src="projectimages/Bayer.jpg" alt="Bayer product image" class="brand-image">
+                    <div class="brand-name">Bayer</div>
+                </a>
+            </div>
+
+            <!-- Raccolto Brand -->
+            <div class="brand" data-category="pesticides" data-name="raccolto">
+                <a href="raccolto.html">
+                    <img src="projectimages/Raccolto.jpg" alt="Raccolto product image" class="brand-image">
+                    <div class="brand-name">Raccolto</div>
+                </a>
+            </div>
+
+            <!-- Rallis India Brand -->
+            <div class="brand" data-category="pesticides" data-name="rallis india">
+                <a href="rallis-india-lim.html">
+                    <img src="projectimages/Rallis India.jpg" alt="Rallis India Product image" class="brand-image">
+                    <div class="brand-name">Rallis India</div>
+                </a>
+            </div>
+
+            <!-- Godrej Agrovet Brand -->
+            <div class="brand" data-category="fertilizers" data-name="godrej">
+                <a href="godrej-agrovet.html">
+                    <img src="projectimages/godrej.png" alt="Godrej brand image" class="brand-image">
+                    <div class="brand-name">Godrej Agrovet</div>
+                </a>
+            </div>
+
+            <!-- Adama Brand -->
+            <div class="brand" data-category="pesticides" data-name="adama">
+                <a href="adama.html">
+                    <img src="projectimages/adama.jpg" alt="Adama Product Image" class="brand-image">
+                    <div class="brand-name">Adama</div>
+                </a>
+            </div>
+
+            <!-- UPL Brand -->
+            <div class="brand" data-category="pesticides" data-name="upl">
+                <a href="upl.html">
+                    <img src="projectimages/UPL.jpg" alt="UPL Product Image" class="brand-image">
+                    <div class="brand-name">UPL</div>
+                </a>
+            </div>
+
+            <!-- Arysta Brand -->
+            <div class="brand" data-category="pesticides" data-name="arysta">
+                <a href="arysta.html">
+                    <img src="projectimages/Arysta.jpg" alt="Arysta Product Image" class="brand-image">
+                    <div class="brand-name">Arysta</div>
+                </a>
+            </div>
+
+            <!-- Coromandel Brand -->
+            <div class="brand" data-category="fertilizers" data-name="coromandel">
+                <a href="coromandal.html">
+                    <img src="projectimages/Coromandel.jpg" alt="Coromandel Product Image" class="brand-image">
+                    <div class="brand-name">Coromandel</div>
+                </a>
+            </div>
+
+            <!-- Indofil Brand -->
+            <div class="brand" data-category="pesticides" data-name="indofil">
+                <a href="indofill.html">
+                    <img src="projectimages/Indofil.jpg" alt="Indofil Product Image" class="brand-image">
+                    <div class="brand-name">Indofil</div>
+                </a>
+            </div>
+
+            <!-- Mahadhan Brand -->
+            <div class="brand" data-category="fertilizers" data-name="mahadhan">
+                <a href="mahadhan.html">
+                    <img src="projectimages/mahadhan.jpg" alt="Mahadhan Product Image" class="brand-image">
+                    <div class="brand-name">Mahadhan</div>
+                </a>
+            </div>
+
+            <!-- HPM Brand -->
+            <div class="brand" data-category="pesticides" data-name="hpm">
+                <a href="hpm.html">
+                    <img src="projectimages/HPM.jpg" alt="HPM Product Image" class="brand-image">
+                    <div class="brand-name">HPM</div>
+                </a>
+            </div>
+
+            <!-- BASF Brand -->
+            <div class="brand" data-category="pesticides" data-name="basf">
+                <a href="basf.html">
+                    <img src="projectimages/basf.jpg" alt="Basf Product Image" class="brand-image">
+                    <div class="brand-name">BASF</div>
+                </a>
+            </div>
+
+            <!-- Syngenta Brand -->
+            <div class="brand" data-category="pesticides" data-name="syngenta">
+                <a href="syngenta.html">
+                    <img src="projectimages/syngenta.jpg" alt="Syngenta Product Image" class="brand-image">
+                    <div class="brand-name">Syngenta</div>
+                </a>
+            </div>
+
+            <!-- IIL Brand -->
+            <div class="brand" data-category="seeds" data-name="iil">
+                <a href="ill.html">
+                    <img src="projectimages/IIL.jpg" alt="IIL Product Image" class="brand-image">
+                    <div class="brand-name">IIL</div>
+                </a>
+            </div>
+
+            <!-- Dhanuka Brand -->
+            <div class="brand" data-category="pesticides" data-name="dhanuka">
+                <a href="dhanuka.html">
+                    <img src="projectimages/Dhanuka.jpg" alt="Dhanuka Product Image" class="brand-image">
+                    <div class="brand-name">Dhanuka</div>
+                </a>
+            </div>
+
+            <div class="brand" data-category="seeds" data-name="jai kisan">
+                <a href="jaikisaan.html">
+                    <img src="projectimages/Jai kisan.jpg" alt="Jaikisan product image" class="brand-image">
+                    <div class="brand-name">Jai Kisan</div>
+                </a>
+            </div>
+           
+            <div class="brand" data-category="fertilizers" data-name="chambal">
+                <a href="chambal.html">
+                    <img src="projectimages/chambal.png" alt="Chambal product image" class="brand-image">
+                    <div class="brand-name">Chambal</div>
+                </a>
+            </div>
+               
+            <div class="brand" data-category="pesticides" data-name="nichino">
+                <a href="nichino.html">
+                    <img src="projectimages/nichino.jpg" alt="Nichino product image" class="brand-image">
+                    <div class="brand-name">Nichino</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="pesticides" data-name="corteva">
+                <a href="Corveta.html">
+                    <img src="projectimages/corveta.jpg" alt="Corteva product image" class="brand-image">
+                    <div class="brand-name">Corteva</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="pesticides" data-name="royal crop science">
+                <a href="projectimages/royalcropscience.html">
+                    <img src="projectimages/royalcropscience.jpg" alt="RCS product image" class="brand-image">
+                    <div class="brand-name">Royal Crop Science</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="pesticides" data-name="fmc">
+                <a href="fmc.html">
+                    <img src="projectimages/fmc.png" alt="FMC product image" class="brand-image">
+                    <div class="brand-name">FMC</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="pesticides" data-name="sumitomo">
+                <a href="sumitomo.html">
+                    <img src="projectimages/sumitomo.jpg" alt="Sumitomo product image" class="brand-image">
+                    <div class="brand-name">Sumitomo</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="pesticides" data-name="crystal crop protection">
+                <a href="crystalcropprotection.html">
+                    <img src="projectimages/crystalcropprotection.jpg" alt="Crystal product image" class="brand-image">
+                    <div class="brand-name">Crystal Crop</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="fertilizers" data-name="paris agro tech">
+                <a href="parisagrotech.html">
+                    <img src="projectimages/parisagrotech.png" alt="Paris Agro product image" class="brand-image">
+                    <div class="brand-name">Paris Agro Tech</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="fertilizers" data-name="iffco">
+                <a href="Iffco.html">
+                    <img src="projectimages/Iffco.jpg" alt="IFFCO product image" class="brand-image">
+                    <div class="brand-name">IFFCO</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="seeds" data-name="dhaanya seed">
+                <a href="dhaanyaseed.html">
+                    <img src="projectimages/Dhaanyaseed.jpg" alt="Dhaanya Seed product image" class="brand-image">
+                    <div class="brand-name">Dhaanya Seed</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="seeds" data-name="kaveri seeds">
+                <a href="kaveriseeds.html">
+                    <img src="projectimages/kaveriseeds.jpg" alt="Kaveri Seeds product image" class="brand-image">
+                    <div class="brand-name">Kaveri Seeds</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="seeds" data-name="safal bio seeds">
+                <a href="safalbioseeds.html">
+                    <img src="projectimages/safalbioseeds.jpg" alt="Safal Bio product image" class="brand-image">
+                    <div class="brand-name">Safal Bio Seeds</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="seeds" data-name="srirama">
+                <a href="srirama.html">
+                    <img src="projectimages/srirama.jpg" alt="Srirama product image" class="brand-image">
+                    <div class="brand-name">Srirama</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="seeds" data-name="krishidhan seed">
+                <a href="krishidhanseed.html">
+                    <img src="projectimages/krishidhanseed.jpg" alt="Krishidhan product image" class="brand-image">
+                    <div class="brand-name">Krishidhan Seed</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="seeds" data-name="green gold">
+                <a href="greengold.html">
+                    <img src="projectimages/greengold.jpg" alt="Green Gold product image" class="brand-image">
+                    <div class="brand-name">Green Gold</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="seeds" data-name="bio seeds">
+                <a href="bioseeds.html">
+                    <img src="projectimages/bioseeds.jpg" alt="Bio Seeds product image" class="brand-image">
+                    <div class="brand-name">Bio Seeds</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="fertilizers" data-name="agricon">
+                <a href="agricon.html">
+                    <img src="projectimages/agricon.jpg" alt="Agricon product image" class="brand-image">
+                    <div class="brand-name">Agricon</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="fertilizers" data-name="swal">
+                <a href="swal.html">
+                    <img src="projectimages/swal.jpg" alt="SWAL product image" class="brand-image">
+                    <div class="brand-name">SWAL</div>
+                </a>
+            </div>
+      
+            <div class="brand" data-category="pesticides" data-name="ichiban">
+                <a href="ichiban.html">
+                    <img src="projectimages/ichiban.jpg" alt="Ichiban product image" class="brand-image">
+                    <div class="brand-name">Ichiban</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+    <script>
+        // Load the footer content dynamically using fetch
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Interactive Features
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('brand-search');
+            const brands = document.querySelectorAll('.brand');
+            const noResults = document.getElementById('no-results');
+            const loader = document.getElementById('loader');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            
+            // Show all brands initially
+            brands.forEach(brand => {
+                brand.style.display = 'block';
+            });
+            
+            // Filter buttons functionality
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    filterBrands(filter);
+                });
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                filterBySearch(searchTerm);
+            });
+            
+            function filterBrands(category) {
+                let hasResults = false;
+                const searchTerm = searchInput.value.toLowerCase();
+                
+                brands.forEach(brand => {
+                    const brandCategory = brand.getAttribute('data-category');
+                    const brandName = brand.getAttribute('data-name');
+                    
+                    const matchesCategory = category === 'all' || brandCategory === category;
+                    const matchesSearch = brandName.includes(searchTerm);
+                    
+                    if (matchesCategory && matchesSearch) {
+                        brand.style.display = 'block';
+                        hasResults = true;
+                    } else {
+                        brand.style.display = 'none';
+                    }
+                });
+                
+                noResults.style.display = hasResults ? 'none' : 'block';
+            }
+            
+            function filterBySearch(searchTerm) {
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                let hasResults = false;
+                
+                // Show loader
+                loader.style.display = 'block';
+                
+                setTimeout(() => {
+                    brands.forEach(brand => {
+                        const brandName = brand.getAttribute('data-name');
+                        const brandCategory = brand.getAttribute('data-category');
+                        
+                        const matchesSearch = brandName.includes(searchTerm);
+                        const matchesFilter = activeFilter === 'all' || brandCategory === activeFilter;
+                        
+                        if (matchesSearch && matchesFilter) {
+                            brand.style.display = 'block';
+                            hasResults = true;
+                        } else {
+                            brand.style.display = 'none';
+                        }
+                    });
+                    
+                    noResults.style.display = hasResults ? 'none' : 'block';
+                    loader.style.display = 'none';
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>

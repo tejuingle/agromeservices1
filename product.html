@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Description</title>
+  <link rel="stylesheet" href="product.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Include Header File Here -->
+  <div id="header-container">
+    <div id="header"></div>
+    <script>
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header').innerHTML = data;
+        });
+    </script>
+  </div>
+
+  <!-- Cart Sidebar -->
+  <div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+      <h3>Your Cart</h3>
+      <button id="close-cart" class="close-cart">&times;</button>
+    </div>
+    <div class="cart-items-container" id="cart-items">
+      <!-- Cart items will be dynamically inserted here -->
+    </div>
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Subtotal:</span>
+        <span id="cart-subtotal">₹0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Tax (5%):</span>
+        <span id="cart-tax">₹0.00</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping:</span>
+        <span id="cart-shipping">FREE</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total:</span>
+        <span id="cart-total">₹0.00</span>
+      </div>
+      <div class="delivery-estimate">
+        <i class="fas fa-truck"></i>
+        <span>Estimated delivery: <span id="delivery-date">3-5 business days</span></span>
+      </div>
+      <button id="checkout-btn" class="button-primary">Proceed to Checkout</button>
+    </div>
+  </div>
+  <div id="cart-overlay" class="cart-overlay"></div>
+
+  <main class="main-content">
+    <div class="product-detail-container">
+      <!-- Product Image -->
+      <div class="product-image-container">
+        <img id="product-main-image" src="projectimages/Token.jpg" alt="Product Image">
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <h1 id="product-name">Token</h1>
+        <div class="price-container">
+          <span class="original-price" id="original-price">₹279.99</span>
+          <span class="discounted-price" id="discounted-price">99.00</span>
+          <span class="discount-percent" id="discount-percent">20% OFF</span>
+        </div>
+        <div class="product-meta">
+          <p>Brand: <span id="product-brand">Brand Name</span></p>
+          <p>Category: <span id="product-category">Category Name</span></p>
+          <div class="rating">
+            <span class="stars">⭐⭐⭐⭐⭐</span>
+            <span class="review-count">(123 reviews)</span>
+          </div>
+        </div>
+        <div class="product-options">
+          <div class="packsize-container">
+            <label>Pack Size:</label>
+            <select id="pack-size">
+              <option value="1kg">1kg</option>
+              <option value="5kg">5kg</option>
+              <option value="10kg">10kg</option>
+            </select>
+          </div>
+          <div class="quantity-container">
+            <label>Quantity:</label>
+            <input type="number" id="quantity" value="1" min="1">
+          </div>
+          <button id="add-to-cart" class="button-primary">Add to Cart</button>
+          <button id="buy-now" class="button-secondary">Buy Now</button>
+        </div>
+        <div class="delivery-info">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Deliver to <strong>India</strong></span>
+        </div>
+        <div class="stock-info">
+          <i class="fas fa-check-circle"></i>
+          <span>In Stock (Only 5 left)</span>
+        </div>
+      </div>
+
+      <!-- Extra Info Section (Offers) -->
+      <div class="extra-info">
+        <div class="offer-section">
+          <div class="offer-item">
+            <div class="offer-icon"><i class="fas fa-credit-card"></i></div>
+            <h3>Cash on Delivery</h3>
+          </div>
+          <div class="offer-item">
+            <div class="offer-icon"><i class="fas fa-gift"></i></div>
+            <h3>Combo Offer</h3>
+          </div>
+          <button id="shop-button" class="button-shop">Shop Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Description Section -->
+    <section class="product-description-section">
+      <div class="product-description-container">
+        <h2>Product Description</h2>
+        <p id="product-description">
+          ABOUT THE PRODUCT
+          Indofil Token Insecticide is a new systemic insecticide with Quick Knock Down action...
+        </p>
+        <button class="toggle-description-btn">Read More</button>
+      </div>
+    </section>
+
+    <!-- Additional Sections -->
+    <div class="additional-sections">
+      <div class="related-products">
+        <h3>Related Products</h3>
+        <div class="related-products-grid" id="related-products">
+          <!-- Related product items will go here -->
+        </div>
+      </div>
+
+      <div class="agromeplus-preview">
+        <h2>AgromePlus</h2>
+        <p class="slogan">Your Ultimate Farming Companion</p>
+        <p class="description">
+          AgromePlus is designed to revolutionize modern farming with cutting-edge technology...
+        </p>
+        <div class="ratings">
+          <span class="stars">⭐⭐⭐⭐⭐</span>
+          <span>4.9/5 (5K+ reviews)</span>
+        </div>
+        <div class="app-features">
+          <div class="feature"><span>📱</span><p>Mobile Management</p></div>
+          <div class="feature"><span>⏰</span><p>Real-time Alerts</p></div>
+          <div class="feature"><span>📊</span><p>Data Insights</p></div>
+          <div class="feature"><span>🌱</span><p>Smart Recommendations</p></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-container"></div>
+  <script>
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('footer-container').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading footer:', error));
+  </script>
+
+  <script type="module" src="product.js"></script>
+</body>
+</html>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Shopping Cart - AgromePlus</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #28a745;
+      --secondary-color: #218838;
+      --accent-color: #e74c3c;
+      --text-color: #333;
+      --light-gray: #f5f5f5;
+      --medium-gray: #ddd;
+      --dark-gray: #777;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--text-color);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 100px auto 50px;
+      padding: 0 20px;
+    }
+    
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--medium-gray);
+    }
+    
+    .cart-title {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-color);
+    }
+    
+    .items-count {
+      font-size: 16px;
+      color: var(--dark-gray);
+    }
+    
+    .cart-container {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 30px;
+    }
+    
+    @media (max-width: 768px) {
+      .cart-container {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Cart Items Section */
+    .cart-items {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 20px;
+    }
+    
+    .cart-item {
+      display: flex;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--medium-gray);
+    }
+    
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    
+    .item-image {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      margin-right: 20px;
+      border: 1px solid var(--medium-gray);
+      border-radius: 4px;
+      padding: 10px;
+    }
+    
+    .item-details {
+      flex: 1;
+    }
+    
+    .item-name {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: var(--text-color);
+    }
+    
+    .item-packsize {
+      font-size: 14px;
+      color: var(--dark-gray);
+      margin-bottom: 10px;
+    }
+    
+    .item-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 15px;
+    }
+    
+    .item-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--medium-gray);
+      border-radius: 4px;
+    }
+    
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      background: none;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-color);
+    }
+    
+    .quantity-input {
+      width: 40px;
+      height: 30px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid var(--medium-gray);
+      border-right: 1px solid var(--medium-gray);
+      font-size: 16px;
+    }
+    
+    .remove-btn {
+      background: none;
+      border: none;
+      color: var(--accent-color);
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    
+    /* Order Summary Section */
+    .order-summary {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 20px;
+      align-self: flex-start;
+      position: sticky;
+      top: 100px;
+    }
+    
+    .summary-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--text-color);
+    }
+    
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+    
+    .summary-row.total {
+      font-weight: 700;
+      font-size: 18px;
+      margin: 20px 0;
+      padding-top: 10px;
+      border-top: 1px solid var(--medium-gray);
+    }
+    
+    .delivery-info {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+    
+    .delivery-info i {
+      color: var(--primary-color);
+      margin-right: 10px;
+    }
+    
+    .checkout-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    
+    .checkout-btn:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .continue-shopping {
+      display: inline-block;
+      margin-top: 15px;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .continue-shopping:hover {
+      text-decoration: underline;
+    }
+    
+    /* Empty Cart */
+    .empty-cart {
+      text-align: center;
+      padding: 50px 20px;
+    }
+    
+    .empty-cart-icon {
+      font-size: 60px;
+      color: var(--medium-gray);
+      margin-bottom: 20px;
+    }
+    
+    .empty-cart-title {
+      font-size: 24px;
+      margin-bottom: 10px;
+      color: var(--text-color);
+    }
+    
+    .empty-cart-message {
+      font-size: 16px;
+      color: var(--dark-gray);
+      margin-bottom: 20px;
+    }
+    
+    .shop-btn {
+      display: inline-block;
+      padding: 12px 30px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    
+    .shop-btn:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    /* Responsive */
+    @media (max-width: 576px) {
+      .cart-item {
+        flex-direction: column;
+      }
+      
+      .item-image {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Include Header -->
+  <div id="header-container"></div>
+  
+  <div class="container">
+    <div class="cart-header">
+      <h1 class="cart-title">Your Shopping Cart</h1>
+      <span class="items-count" id="items-count">0 Items</span>
+    </div>
+    
+    <div class="cart-container">
+      <div class="cart-items" id="cart-items-container">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+      
+      <div class="order-summary">
+        <h2 class="summary-title">Order Summary</h2>
+        
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span id="cart-subtotal">₹0.00</span>
+        </div>
+        
+        <div class="summary-row">
+          <span>Tax (5%):</span>
+          <span id="cart-tax">₹0.00</span>
+        </div>
+        
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span id="cart-shipping">FREE</span>
+        </div>
+        
+        <div class="summary-row total">
+          <span>Total:</span>
+          <span id="cart-total">₹0.00</span>
+        </div>
+        
+        <div class="delivery-info">
+          <i class="fas fa-truck"></i>
+          <span>Estimated delivery: <span id="delivery-date">3-5 business days</span></span>
+        </div>
+        
+        <button id="checkout-btn" class="checkout-btn">Proceed to Checkout</button>
+        <a href="shop.html" class="continue-shopping">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Include Footer -->
+  <div id="footer-container"></div>
+  
+  <script>
+    // Load header and footer
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header-container').innerHTML = data;
+        });
+      
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-container').innerHTML = data;
+        })
+        .then(() => {
+          // Initialize cart after header is loaded
+          initializeCart();
+        });
+    });
+    
+    // Cart functionality
+    function initializeCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsContainer = document.getElementById('cart-items-container');
+      const itemsCountElement = document.getElementById('items-count');
+      const cartSubtotal = document.getElementById('cart-subtotal');
+      const cartTax = document.getElementById('cart-tax');
+      const cartTotal = document.getElementById('cart-total');
+      const deliveryDate = document.getElementById('delivery-date');
+      const checkoutBtn = document.getElementById('checkout-btn');
+      
+      // Update delivery date
+      function updateDeliveryDate() {
+        const today = new Date();
+        const deliveryDateObj = new Date(today);
+        deliveryDateObj.setDate(today.getDate() + 3); // 3 days from today
+        
+        const options = { weekday: 'long', month: 'long', day: 'numeric' };
+        deliveryDate.textContent = deliveryDateObj.toLocaleDateString('en-US', options);
+      }
+      
+      // Calculate cart totals
+      function calculateTotals() {
+        const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        const tax = subtotal * 0.05; // 5% tax
+        const total = subtotal + tax;
+        
+        cartSubtotal.textContent = `₹${subtotal.toFixed(2)}`;
+        cartTax.textContent = `₹${tax.toFixed(2)}`;
+        cartTotal.textContent = `₹${total.toFixed(2)}`;
+        itemsCountElement.textContent = `${cart.reduce((total, item) => total + item.quantity, 0)} Items`;
+        
+        return { subtotal, tax, total };
+      }
+      
+      // Render cart items
+      function renderCartItems() {
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = `
+            <div class="empty-cart">
+              <div class="empty-cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+              <h2 class="empty-cart-title">Your cart is empty</h2>
+              <p class="empty-cart-message">Looks like you haven't added anything to your cart yet</p>
+              <a href="shop.html" class="shop-btn">Shop Now</a>
+            </div>
+          `;
+          checkoutBtn.disabled = true;
+          return;
+        }
+        
+        checkoutBtn.disabled = false;
+        
+        cartItemsContainer.innerHTML = cart.map((item, index) => `
+          <div class="cart-item" data-id="${item.id}" data-packsize="${item.packSize}">
+            <img src="${item.imageSrc}" alt="${item.name}" class="item-image">
+            <div class="item-details">
+              <h3 class="item-name">${item.name}</h3>
+              <p class="item-packsize">Pack Size: ${item.packSize}</p>
+              <p class="item-price">₹${item.price.toFixed(2)}</p>
+              <div class="item-actions">
+                <div class="quantity-control">
+                  <button class="quantity-btn minus" data-index="${index}">-</button>
+                  <input type="number" class="quantity-input" value="${item.quantity}" min="1" data-index="${index}">
+                  <button class="quantity-btn plus" data-index="${index}">+</button>
+                </div>
+                <button class="remove-btn" data-index="${index}">
+                  <i class="fas fa-trash"></i> Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+        
+        // Add event listeners to quantity buttons
+        document.querySelectorAll('.quantity-btn').forEach(button => {
+          button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const input = document.querySelector(`.quantity-input[data-index="${index}"]`);
+            let newQuantity = parseInt(input.value);
+            
+            if (this.classList.contains('minus')) {
+              newQuantity = Math.max(1, newQuantity - 1);
+            } else if (this.classList.contains('plus')) {
+              newQuantity = newQuantity + 1;
+            }
+            
+            input.value = newQuantity;
+            updateCartItem(index, newQuantity);
+          });
+        });
+        
+        // Add event listeners to quantity inputs
+        document.querySelectorAll('.quantity-input').forEach(input => {
+          input.addEventListener('change', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const newQuantity = parseInt(this.value);
+            
+            if (newQuantity >= 1) {
+              updateCartItem(index, newQuantity);
+            } else {
+              this.value = 1;
+            }
+          });
+        });
+        
+        // Add event listeners to remove buttons
+        document.querySelectorAll('.remove-btn').forEach(button => {
+          button.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            removeCartItem(index);
+          });
+        });
+      }
+      
+      // Update cart item quantity
+      function updateCartItem(index, newQuantity) {
+        cart[index].quantity = newQuantity;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        calculateTotals();
+        updateHeaderCartCount();
+      }
+      
+      // Remove cart item
+      function removeCartItem(index) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCartItems();
+        calculateTotals();
+        updateHeaderCartCount();
+      }
+      
+      // Update cart count in header
+      function updateHeaderCartCount() {
+        if (typeof updateCartCount === 'function') {
+          updateCartCount();
+        }
+      }
+      
+      // Initialize
+      updateDeliveryDate();
+      calculateTotals();
+      renderCartItems();
+      
+     // Checkout button
+  checkoutBtn.addEventListener('click', function() {
+    if (cart.length > 0) {
+      // Calculate totals before proceeding
+      const totals = calculateTotals();
+      const cartData = {
+        items: cart,
+        subtotal: totals.subtotal,
+        tax: totals.tax,
+        total: totals.total
+      };
+      localStorage.setItem('checkoutData', JSON.stringify(cartData));
+      window.location.href = 'checkout.html';
+    }
+  });
+    }
+  </script>
+</body>
+</html>

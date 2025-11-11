@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Sign Up</title>
+    <link rel="stylesheet" href="loginform.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <img src="projectimages/agromelogoimage.png" alt="Agrome Logo" class="logo">
+        <div id="head">
+            <input type="text" class="search-bar" placeholder="Search...">
+            <span class="search-icon"></span>
+            <button class="go-btn">Go</button>
+        </div>
+        <button class="login-btn">Login</button>
+        <button class="cart-btn" js-cart-quantity>
+            <i class="fa-solid fa-cart-shopping"></i>
+        </button>     
+    </header>
+
+    <!-- Modal for Login and Signup -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+
+            <!-- Login Form -->
+            <div id="login-form" class="form">
+                <h2>Login</h2>
+                <label for="login-email">Email:</label>
+                <input type="email" id="login-email" placeholder="Enter your email">
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" placeholder="Enter your password">
+                <button onclick="submitLogin()">Login</button>
+                <p>Don't have an account? <a href="javascript:void(0)" onclick="toggleToSignup()">Sign Up</a></p>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="form" style="display: none;">
+                <h2>Sign Up</h2>
+                <label for="signup-email">Email:</label>
+                <input type="email" id="signup-email" placeholder="Enter your email">
+                <label for="signup-password">Password:</label>
+                <input type="password" id="signup-password" placeholder="Enter your password">
+                <button onclick="submitSignup()">Sign Up</button>
+                <p>Already have an account? <a href="javascript:void(0)" onclick="toggleToLogin()">Login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link JavaScript files -->
+    <script src="login-button.js"></script>
+    <script src="loginform.js"></script>
+</body>
+</html>

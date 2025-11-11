@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Royal Crop Science - Agriculture Solutions</title>
+  <link rel="stylesheet" href="brand.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <div id="header-container">
+    <div id="header"></div>
+    <script>
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header').innerHTML = data;
+        });
+    </script>
+  </div>
+
+  <section class="main-content">
+    <div class="content-container">
+      <div class="category-hero">
+        <img src="projectimages/royalcropscience.jpg" alt="Royal Crop Science" class="hero-image" />
+        <div class="hero-overlay">
+          <h1>Royal Crop Science</h1>
+          <p>Empowering farmers with superior crop protection</p>
+        </div>
+      </div>
+
+      <div class="brand-info">
+        <div class="brand-logo">
+          <img src="projectimages/royalcropscience.jpg" alt="Royal Crop Science Logo" class="brand-logo-img" />
+        </div>
+        <div class="brand-description">
+          <p>Royal Crop Science provides a wide range of high-quality crop protection products designed to enhance agricultural productivity and promote sustainable farming.</p>
+        </div>
+      </div>
+
+      <div class="product-filter">
+        <div class="filter-options">
+          <button class="filter-btn active" data-filter="all">All Products</button>
+          <button class="filter-btn" data-filter="pesticides">Pesticides</button>
+          <button class="filter-btn" data-filter="fertilizers">Fertilizers</button>
+        </div>
+        <div class="sort-options">
+          <label for="sort">Sort by:</label>
+          <select id="sort">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: Low to High</option>
+            <option value="price-high">Price: High to Low</option>
+            <option value="discount">Best Discount</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="product-container" id="featured-products-container"></div>
+
+      <div class="brand-features">
+        <div class="feature-card">
+          <i class="fas fa-leaf"></i>
+          <h3>Sustainability</h3>
+          <p>Focusing on environmentally-friendly farming practices to maximize crop yield.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-flask"></i>
+          <h3>Innovation</h3>
+          <p>Developing new, advanced solutions that address the challenges faced by farmers.</p>
+        </div>
+        <div class="feature-card">
+          <i class="fas fa-globe"></i>
+          <h3>Global Reach</h3>
+          <p>Delivering quality products to farmers across multiple continents.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { products } from './data1/data.js';
+
+    const productsContainer = document.getElementById('featured-products-container');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const sortSelect = document.getElementById('sort');
+
+    let royalCropScienceProducts = products.filter(product => product.brandName === "Royal Crop Science");
+
+    function createProductHTML(product) {
+      const finalPrice = (product.originalPrice - (product.originalPrice * product.discountPercentage / 100)).toFixed(2);
+      const productDiv = document.createElement('div');
+      productDiv.classList.add('product-item');
+      productDiv.dataset.productId = product.id;
+      productDiv.dataset.category = product.category.toLowerCase();
+
+      productDiv.innerHTML = `
+        <div class="product-image-container">
+          <img src="${product.imageSrc}" alt="${product.name}" loading="lazy">
+          <div class="discount-badge">${product.discountPercentage}%</div>
+          <div class="quick-view">Quick View</div>
+        </div>
+        <div class="product-details">
+          <h3 class="product-name">${product.name}</h3>
+          <p class="brand-name">${product.brandName}</p>
+          <div class="rating">
+            ${generateRatingStars(product.rating || 4)}
+            <span>(${product.reviews || 12})</span>
+          </div>
+          <div class="price-section">
+            <p class="final-price">₹${finalPrice}</p>
+            <p class="price">₹${product.originalPrice}</p>
+          </div>
+          <div class="product-actions">
+            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+            <button class="compare-btn"><i class="fas fa-exchange-alt"></i></button>
+          </div>
+        </div>`;
+      return productDiv;
+    }
+
+    function generateRatingStars(rating) {
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      let stars = '';
+
+      for (let i = 1; i <= 5; i++) {
+        if (i <= fullStars) {
+          stars += '<i class="fas fa-star"></i>';
+        } else if (i === fullStars + 1 && hasHalfStar) {
+          stars += '<i class="fas fa-star-half-alt"></i>';
+        } else {
+          stars += '<i class="far fa-star"></i>';
+        }
+      }
+
+      return stars;
+    }
+
+    function displayProducts(productsToDisplay) {
+      productsContainer.innerHTML = '';
+      productsToDisplay.forEach(product => {
+        productsContainer.appendChild(createProductHTML(product));
+      });
+    }
+
+    function filterProducts(category) {
+      if (category === 'all') {
+        displayProducts(royalCropScienceProducts);
+      } else {
+        const filtered = royalCropScienceProducts.filter(product =>
+          product.category.toLowerCase().includes(category)
+        );
+        displayProducts(filtered);
+      }
+    }
+
+    function sortProducts(sortBy) {
+      let sortedProducts = [...royalCropScienceProducts];
+      switch (sortBy) {
+        case 'price-low':
+          sortedProducts.sort((a, b) =>
+            (a.originalPrice - a.originalPrice * a.discountPercentage / 100) -
+            (b.originalPrice - b.originalPrice * b.discountPercentage / 100)
+          );
+          break;
+        case 'price-high':
+          sortedProducts.sort((a, b) =>
+            (b.originalPrice - b.originalPrice * b.discountPercentage / 100) -
+            (a.originalPrice - a.originalPrice * a.discountPercentage / 100)
+          );
+          break;
+        case 'discount':
+          sortedProducts.sort((a, b) => b.discountPercentage - a.discountPercentage);
+          break;
+        default:
+          break;
+      }
+      displayProducts(sortedProducts);
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        filterProducts(button.dataset.filter);
+      });
+    });
+
+    sortSelect.addEventListener('change', () => {
+      sortProducts(sortSelect.value);
+    });
+
+    displayProducts(royalCropScienceProducts);
+
+    document.addEventListener('click', (event) => {
+      const productItem = event.target.closest('.product-item');
+      if (productItem) {
+        const productId = productItem.dataset.productId;
+        window.location.href = `product.html?id=${productId}`;
+      }
+
+      if (event.target.closest('.wishlist-btn')) {
+        event.stopPropagation();
+        const btn = event.target.closest('.wishlist-btn');
+        btn.classList.toggle('active');
+        btn.innerHTML = btn.classList.contains('active') ?
+          '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+      }
+    });
+  </script>
+</body>
+</html>

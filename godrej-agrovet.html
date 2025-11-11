@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Godrej - Product Page</title>
+    <link rel="stylesheet" href="brand.css"> <!-- Link to the updated CSS -->
+</head>
+<body>
+    <!-- Include Header File Here -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <!-- Main Content (Godrej Page Content) -->
+    <section class="main-content">
+        <div class="content-container">
+            <div class="category-section">
+                <img src="projectimages/godrej.png" alt="Godrej Product Category Image" class="category-image">
+            </div>
+
+            <div class="product-container" id="featured-products-container">
+                <!-- Product items will be dynamically inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+    <script type="module">
+        import { products } from './data1/data.js';
+
+        const productsContainer = document.getElementById('featured-products-container');
+        const relatedProductsContainer = document.getElementById('related-products-container');
+        
+        const godrejProducts = products.filter(product => product.brandName === "Godrej");
+        
+        function createProductHTML(product) {
+            const finalPrice = (product.originalPrice - (product.originalPrice * product.discountPercentage / 100)).toFixed(2);
+            const productDiv = document.createElement('div');
+            productDiv.classList.add('product-item');
+            productDiv.dataset.productId = product.id;
+            productDiv.innerHTML = 
+                `<div class="product-image-container">
+                    <img src="${product.imageSrc}" alt="${product.name} Image">
+                    <div class="discount-badge">-${product.discountPercentage}%</div>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="brand-name">Brand: ${product.brandName}</p>
+                    <p class="product-category">Category: ${product.category}</p>
+                    <div class="price-section">
+                        <p class="price">₹${product.originalPrice}</p>
+                        <p class="final-price">₹${finalPrice}</p>
+                    </div>
+                </div>`;
+            return productDiv;
+        }
+
+        function displayGodrejProducts() {
+            godrejProducts.forEach(product => {
+                productsContainer.appendChild(createProductHTML(product));
+            });
+        }
+
+        function displayRelatedGodrejProducts() {
+            godrejProducts.slice(0, 4).forEach(product => {
+                relatedProductsContainer.appendChild(createProductHTML(product));
+            });
+        }
+
+        document.addEventListener('click', (event) => {
+            const productItem = event.target.closest('.product-item, .related-product-item');
+            if (productItem) {
+                const productId = productItem.dataset.productId;
+                window.location.href = `product.html?id=${productId}`;
+            }
+        });
+
+        displayGodrejProducts();
+        displayRelatedGodrejProducts();
+        
+    </script>
+</body>
+</html>

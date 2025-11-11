@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms and Conditions</title>
+    <style>
+        /* Main Content */
+        .content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .content h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        
+        .content h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .content p {
+            margin-bottom: 20px;
+        }
+
+        .terms-list {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        h4 {
+            margin-top: 20px;
+            cursor: pointer;
+            padding: 10px 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #2c3e50;
+            border-left: 4px solid #4CAF50;
+        }
+
+        h4:hover {
+            background-color: #e9f5e9;
+        }
+
+        h4::after {
+            content: '+';
+            font-size: 1.5em;
+            transition: transform 0.3s ease;
+        }
+
+        h4.active::after {
+            content: '-';
+        }
+
+        .collapsible-content {
+            display: none;
+            margin-left: 20px;
+            padding: 15px;
+            border-left: 2px solid #4CAF50;
+            background-color: #f8f9fa;
+            border-radius: 0 0 5px 5px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Back to Top Button */
+        #backToTopBtn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        #backToTopBtn:hover {
+            background-color: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Progress indicator */
+        .progress-container {
+            width: 100%;
+            height: 5px;
+            background: #f1f1f1;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 5px;
+            background: #4CAF50;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        /* Accept button */
+        #acceptBtn {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 30px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #acceptBtn:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Search functionality */
+        .search-container {
+            margin-bottom: 30px;
+        }
+
+        #termsSearch {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        /* Highlight for search results */
+        .highlight {
+            background-color: #ffeb3b;
+            padding: 2px;
+        }
+
+        /* Print button */
+        #printBtn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        #printBtn:hover {
+            background-color: #0b7dda;
+            transform: translateY(-3px);
+        }
+
+        /* Dark mode toggle */
+        #darkModeToggle {
+            position: fixed;
+            bottom: 140px;
+            right: 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .content {
+                padding: 15px;
+            }
+            
+            h4 {
+                padding: 8px 12px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress indicator -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Header Section -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h2>Terms and Conditions</h2>
+
+        <!-- Search functionality -->
+        <div class="search-container">
+            <input type="text" id="termsSearch" placeholder="Search terms and conditions..." onkeyup="searchTerms()">
+        </div>
+
+        <h4 onclick="toggleContent('productContent')">Product</h4>
+        <div id="productContent" class="collapsible-content">
+            <p>These terms and conditions ("Terms & Conditions") govern the use of the 'Products' section where available ("Products Section") on the website– "Farme" ("Website").</p>
+            <p>It is hereby clarified that the term "Users" or "You" shall mean any person duly registered and using the Platform i.e. consumers, farmers and/or farmers societies/groups...</p>
+        </div>
+
+        <h4 onclick="toggleContent('generalContent')">GENERAL</h4>
+        <div id="generalContent" class="collapsible-content">
+            <p>In the event You wish to avail any of the services or products displayed on the Platform...</p>
+            <ul class="terms-list">
+                <li>All products are subject to availability</li>
+                <li>Prices may vary based on market conditions</li>
+                <li>Delivery times are estimates only</li>
+            </ul>
+        </div>
+
+        <h4 onclick="toggleContent('eligibilityContent')">ELIGIBILITY</h4>
+        <div id="eligibilityContent" class="collapsible-content">
+            <p>The User of this Platform unequivocally declares and agrees that the User is a natural/legal person who has attained the age of at least 18 (Eighteen) years...</p>
+            <p>Additional eligibility criteria may apply for certain products or services.</p>
+        </div>
+
+        <h1>Acceptance of Terms and Conditions</h1>
+        <p>As a User of this Platform, You have agreed to the Terms & Conditions provided hereunder...</p>
+        <p>By continuing to use our services, you acknowledge that you have read, understood, and agree to be bound by these terms.</p>
+
+        <!-- More sections here... -->
+        <h4 onclick="toggleContent('privacyContent')">PRIVACY POLICY</h4>
+        <div id="privacyContent" class="collapsible-content">
+            <p>Your privacy is important to us. Please review our Privacy Policy which explains how we collect, use, and protect your personal information.</p>
+            <p>We may update our privacy policy from time to time, and we will notify users of any significant changes.</p>
+        </div>
+
+        <h4 onclick="toggleContent('paymentContent')">PAYMENT TERMS</h4>
+        <div id="paymentContent" class="collapsible-content">
+            <p>All payments must be made in full before products are shipped or services are rendered.</p>
+            <p>We accept various payment methods including credit cards, debit cards, and bank transfers.</p>
+        </div>
+
+        <button id="acceptBtn" onclick="acceptTerms()">I Accept These Terms</button>
+    </div>
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <script src="product.js"></script>
+    <script src="new.js"></script>
+
+    <!-- Interactive buttons -->
+    <button id="backToTopBtn" onclick="scrollToTop()" title="Back to Top">↑</button>
+    <button id="printBtn" onclick="window.print()" title="Print Terms">🖨️</button>
+    <button id="darkModeToggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">🌓</button>
+
+    <script>
+        // Toggle collapsible content with animation
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            var header = content.previousElementSibling;
+            
+            if (content.style.display === "none" || content.style.display === "") {
+                content.style.display = "block";
+                header.classList.add('active');
+            } else {
+                content.style.display = "none";
+                header.classList.remove('active');
+            }
+        }
+
+        // Show or hide "Back to Top" button based on scroll position
+        window.onscroll = function() {
+            var button = document.getElementById("backToTopBtn");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                button.style.display = "block";
+            } else {
+                button.style.display = "none";
+            }
+            
+            // Update progress bar
+            updateProgressBar();
+        };
+
+        // Scroll to the top of the page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Update scroll progress indicator
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progressBar").style.width = scrolled + "%";
+        }
+
+        // Accept terms button functionality
+        function acceptTerms() {
+            alert('Thank you for accepting our Terms and Conditions!');
+            // In a real application, you would store this acceptance
+            // localStorage.setItem('termsAccepted', 'true');
+        }
+
+        // Search functionality
+        function searchTerms() {
+            const input = document.getElementById('termsSearch');
+            const filter = input.value.toUpperCase();
+            const sections = document.querySelectorAll('.collapsible-content');
+            
+            // Remove previous highlights
+            document.querySelectorAll('.highlight').forEach(el => {
+                const parent = el.parentNode;
+                parent.replaceChild(document.createTextNode(el.textContent), parent);
+            });
+            
+            if (filter.length < 3) return; // Only search if 3+ characters
+            
+            sections.forEach(section => {
+                const text = section.textContent || section.innerText;
+                if (text.toUpperCase().indexOf(filter) > -1) {
+                    // Expand the section if it contains the search term
+                    section.style.display = 'block';
+                    section.previousElementSibling.classList.add('active');
+                    
+                    // Highlight the matching text
+                    const regex = new RegExp(filter, 'gi');
+                    section.innerHTML = section.innerHTML.replace(
+                        regex, 
+                        match => `<span class="highlight">${match}</span>`
+                    );
+                }
+            });
+        }
+
+        // Dark mode toggle
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark);
+            
+            // Update dark mode toggle button
+            const darkModeBtn = document.getElementById('darkModeToggle');
+            darkModeBtn.textContent = isDark ? '☀️' : '🌙';
+            darkModeBtn.style.backgroundColor = isDark ? '#555' : '#333';
+        }
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('darkModeToggle').textContent = '☀️';
+            document.getElementById('darkModeToggle').style.backgroundColor = '#555';
+        }
+
+        // Add dark mode styles if needed
+        const style = document.createElement('style');
+        style.textContent = `
+            .dark-mode {
+                background-color: #121212;
+                color: #e0e0e0;
+            }
+            .dark-mode .content {
+                background-color: #1e1e1e;
+                color: #e0e0e0;
+            }
+            .dark-mode h1, .dark-mode h2, .dark-mode h4 {
+                color: #ffffff;
+            }
+            .dark-mode .collapsible-content {
+                background-color: #2d2d2d;
+                border-left-color: #4CAF50;
+            }
+            .dark-mode h4 {
+                background-color: #2d2d2d;
+            }
+            .dark-mode h4:hover {
+                background-color: #3d3d3d;
+            }
+            .dark-mode #termsSearch {
+                background-color: #2d2d2d;
+                color: #ffffff;
+                border-color: #444;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Open first section by default
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleContent('productContent');
+        });
+    </script>
+</body>
+</html>

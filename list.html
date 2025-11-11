@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <script defer src="data.js" type="module"></script>
+    <script defer src="script.js" type="module"></script>
+</head>
+<body>
+    <h1>Products</h1>
+    <div id="product-list"></div>
+</body>
+</html>
+
+<script>import products from './data.js';
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const productList = document.getElementById("product-list");
+    
+        products.forEach(product => {
+            const productDiv = document.createElement("div");
+            productDiv.innerHTML = `
+                <h2>${product.name}</h2>
+                <p>Price: $${product.discountPrice} <del>$${product.price}</del> (${product.discountPercent})</p>
+                <img src="${product.image}" width="100">
+                <button onclick="viewProduct(${product.id})">View Details</button>
+            `;
+            productList.appendChild(productDiv);
+        });
+    });
+    
+    window.viewProduct = (id) => {
+        window.location.href = `product.html?id=${id}`;
+    };
+</script>    

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+        .top-notification {
+            background-color: #d7eacc;
+            padding: 10px;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            height: 10px;
+
+        }
+        .top-notification button {
+            background-color: transparent;
+            color: black;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: green;
+        }
+        .nav-links a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .login-box {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        .login-box input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .login-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-box button:hover {
+            background-color: darkgreen;
+        }
+        .login-box p {
+            margin-top: 15px;
+        }
+        .login-box a {
+            color: green;
+            text-decoration: none;
+        }
+        .login-box a:hover {
+            text-decoration: underline;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        .modal-content h2 {
+            margin-bottom: 20px;
+            color: green;
+        }
+        .modal-content input,
+        .modal-content select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .modal-content button {
+            width: 100%;
+            padding: 12px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .modal-content button:hover {
+            background-color: darkgreen;
+        }
+        .modal-content p {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-notification" id="topNotification">
+      Cash on Delivery available &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; Special Offers &nbsp;&nbsp;&nbsp;
+        <button onclick="closeNotification()">✖</button>
+    </div>
+    <div class="header">
+        <div class="logo">AGRO ME PLUS</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="Shop.html">Shop</a>
+        </div>
+    </div>
+    <div class="login-box">
+        <h2>Login to your account</h2>
+        <input type="text" placeholder="Phone Number">
+        <button onclick="requestOTP()">Request OTP</button>
+        <p>Don't have an account? <a href="#" onclick="openRegisterModal()">Register Now</a></p>
+    </div>
+
+    <!-- The Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRegisterModal()">&times;</span>
+            <h2>Create an account</h2>
+            <input type="text" placeholder="Full Name">
+            <input type="email" placeholder="Email">
+            <input type="tel" placeholder="Phone Number">
+            <input type="tel" placeholder="Alternate Phone Number">
+            <input type="text" placeholder="Country">
+            <input type="text" placeholder="Pincode">
+            <input type="text" placeholder="Address">
+            <input type="text" placeholder="State">
+            <input type="text" placeholder="District">
+            <select>
+                <option>Select Type of user</option>
+                <option>Individual</option>
+                <option>Business</option>
+            </select>
+            <button onclick="submitRegistration()">Sign Up</button>
+            <p>By signing up you agree to our terms and conditions.</p>
+        </div>
+    </div>
+
+    <script>
+        function requestOTP() {
+            alert("OTP has been sent to your mobile number.");
+        }
+
+        function openRegisterModal() {
+            document.getElementById('registerModal').style.display = 'block';
+        }
+
+        function closeRegisterModal() {
+            document.getElementById('registerModal').style.display = 'none';
+        }
+
+        function submitRegistration() {
+            alert("Registration submitted successfully!");
+            closeRegisterModal();
+        }
+
+        function closeNotification() {
+            document.getElementById('topNotification').style.display = 'none';
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('registerModal');
+            if (event.target == modal) {
+                closeRegisterModal();
+            }
+        }
+    </script>
+</body>
+</html>

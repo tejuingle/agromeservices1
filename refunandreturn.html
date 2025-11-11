@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return and Refund Policy | Agromeplus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #388E3C;
+            --accent-color: #8BC34A;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+        
+        
+        /* Main Content Styles */
+        .content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .content h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .policy-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            background-color: var(--light-gray);
+            border-radius: 0 4px 4px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .policy-section:hover {
+            transform: translateX(5px);
+        }
+        
+        .policy-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .policy-section h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .policy-section p {
+            margin-bottom: 1rem;
+        }
+        
+        .policy-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .policy-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .expand-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1rem;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        
+        .expand-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .hidden-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 4px;
+        }
+        
+        /* FAQ Section */
+        .faq-container {
+            margin-top: 3rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1rem;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-question:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+            background-color: var(--white);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 3rem 2rem;
+            background-color: #2E7D32;
+            color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+    <!-- Navbar Section -->
+
+    <!-- Main Content for Return and Refund Policy -->
+    <div class="content">
+        <h1><i class="fas fa-exchange-alt"></i> Return and Refund Policy</h1>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-ban"></i> Cancellation Policy</h2>
+            <p>If a customer changes their mind and wants to cancel the order, then they have to contact our Customer Care executive. The cancellation will not be valid until it is confirmed by our respective department.</p>
+            <p>Cancellation requests will be considered only if the product is not dispatched. Once the order is shipped, customer cannot cancel the order.</p>
+            <p>If the customer has placed an order through Online Payment and cancels the order, then we will process for a refund within 15 working days.</p>
+        </div>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-undo"></i> Return Policy</h2>
+            <p>We accept returns within 30 days of purchase for most unopened and unused products in their original packaging. Some products may have different return policies as specified on the product page.</p>
+            <button class="expand-btn" onclick="toggleContent('return-details')">View Details</button>
+            <div id="return-details" class="hidden-content">
+                <p><strong>Conditions for Returns:</strong></p>
+                <ul>
+                    <li>Product must be in original packaging with all tags attached</li>
+                    <li>Proof of purchase is required</li>
+                    <li>Certain products like seeds and perishables are non-returnable</li>
+                    <li>Products damaged due to customer misuse are not eligible for return</li>
+                </ul>
+                <p><strong>Return Process:</strong></p>
+                <ol>
+                    <li>Contact our customer service to initiate a return</li>
+                    <li>Receive return authorization and instructions</li>
+                    <li>Pack the item securely and ship it back to us</li>
+                    <li>Once received and inspected, we'll process your refund</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-money-bill-wave"></i> Refund Policy</h2>
+            <p>Refunds will be issued to the original payment method within 15 business days after we receive and inspect your return. Shipping costs are non-refundable.</p>
+            <button class="expand-btn" onclick="toggleContent('refund-details')">View Details</button>
+            <div id="refund-details" class="hidden-content">
+                <p><strong>Refund Methods:</strong></p>
+                <ul>
+                    <li>Credit/Debit Card: 5-10 business days</li>
+                    <li>Bank Transfer: 7-15 business days</li>
+                    <li>Digital Wallets: 3-5 business days</li>
+                </ul>
+                <p><strong>Note:</strong> During peak seasons, refund processing may take longer. You will receive an email notification once your refund has been processed.</p>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-truck"></i> Shipping Policy</h2>
+            <p>We aim to process and ship orders within 1-2 business days. Delivery times vary depending on your location and the shipping method selected.</p>
+            <button class="expand-btn" onclick="toggleContent('shipping-details')">View Details</button>
+            <div id="shipping-details" class="hidden-content">
+                <p><strong>Shipping Options:</strong></p>
+                <ul>
+                    <li>Standard Shipping: 3-7 business days</li>
+                    <li>Express Shipping: 2-3 business days</li>
+                    <li>Local Pickup: Available at select locations</li>
+                </ul>
+                <p><strong>Shipping Restrictions:</strong> Some agricultural products may have shipping restrictions to certain regions due to local regulations. We'll notify you if your order is affected.</p>
+            </div>
+        </div>
+        
+        <div class="faq-container">
+            <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    How do I initiate a return? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>To initiate a return, please contact our customer service team with your order number and reason for return. We'll provide you with return authorization and instructions.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    What if I receive a damaged product? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>If you receive a damaged product, please contact us within 48 hours of delivery with photos of the damaged item and packaging. We'll arrange for a replacement or refund.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Can I return opened agricultural chemicals? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>For safety reasons, we cannot accept returns of opened agricultural chemicals, pesticides, or herbicides. Unopened products in their original sealed packaging may be returned within 30 days.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    How long does a refund take to process? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Refunds typically take 5-15 business days to process after we receive your return, depending on your payment method. You'll receive an email confirmation when the refund is issued.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <div class="sticky-navbar">
+        <p>&copy; 2025 Agromeplus. All Rights Reserved. | <a href="#" style="color: white;">Privacy Policy</a> | <a href="#" style="color: white;">Terms of Service</a></p> 
+    </div>
+    
+    <script>
+        // Toggle hidden content
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        }
+        
+        // Toggle FAQ items
+        function toggleFAQ(element) {
+            // Toggle active class on question
+            element.classList.toggle('active');
+            
+            // Get the answer element
+            const answer = element.nextElementSibling;
+            
+            // Toggle display of answer
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
+        }
+        
+        // Make navbar sticky on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-container');
+            if (window.scrollY > 100) {
+                navbar.style.position = 'fixed';
+                navbar.style.top = '0';
+                navbar.style.width = '100%';
+                navbar.style.zIndex = '1000';
+            } else {
+                navbar.style.position = 'relative';
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+
+
+</body>
+</html>

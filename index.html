@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroME - Agricultural Products</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="projectimages/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <!-- Banner 1 -->
+    <section class="banner-section">
+        <div class="banner-container">
+            <div class="banner">
+                <img src="projectimages/banner1image.jpg" alt="Banner Image1" class="banner-img">
+                <div class="banner-content">
+                    <p class="banner-text">Original Product | Best Seller | COD Available on ₹500+</p>
+                    <a href="shop.html" class="shop-now-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="category-section">
+        <div class="container">
+            <h2 class="section-title">Shop by Categories</h2>
+            <div class="categories-grid">
+                <a href="insecticide.html" class="category-card">
+                    <img src="projectimages/insecticide.jpg" alt="Insecticide" class="category-image">
+                    <span>Insecticide</span>
+                </a>
+                <a href="fungicide.html" class="category-card">
+                    <img src="projectimages/fungicide.jpg" alt="Fungicide" class="category-image">
+                    <span>Fungicide</span>
+                </a>
+                <a href="herbicide.html" class="category-card">
+                    <img src="projectimages/herbicide.jpg" alt="Herbicide" class="category-image">
+                    <span>Herbicide</span>
+                </a>
+                <a href="seed.html" class="category-card">
+                    <img src="projectimages/seed.jpg" alt="Seeds" class="category-image">
+                    <span>Seeds</span>
+                </a>
+                <a href="plantgrowth.html" class="category-card">
+                    <img src="projectimages/plantgrowth.jpg" alt="Plant Growth" class="category-image">
+                    <span>Plant Growth</span>
+                </a>
+                <a href="shopbybrand.html" class="category-card">
+                    <img src="projectimages/shop by brand.jpg" alt="Shop by Brand" class="category-image">
+                    <span>Shop by Brand</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+
+    <!-- Best Selling Products -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">Best Selling Products</h2>
+            <div class="products-grid" id="best-selling-container"></div>
+        </div>
+    </section>
+
+    <!-- Shop by Brand -->
+    <section class="brands-section">
+        <div class="container">
+            <h2 class="section-title">Shop by Brand</h2>
+            <div class="brands-grid">
+                <a href="bayerbrand.html" class="brand-card">
+                    <img src="projectimages/Bayer.jpg" alt="Bayer" class="brand-image">
+                </a>
+                <a href="raccolto.html" class="brand-card">
+                    <img src="projectimages/Raccolto.jpg" alt="Raccolto" class="brand-image">
+                </a>
+                <a href="rallis-india-lim.html" class="brand-card">
+                    <img src="projectimages/Rallis India.jpg" alt="Rallis India" class="brand-image">
+                </a>
+                <a href="godrej-agrovet.html" class="brand-card">
+                    <img src="projectimages/godrej.png" alt="Godrej" class="brand-image">
+                </a>
+                <a href="adama.html" class="brand-card">
+                    <img src="projectimages/adama.jpg" alt="Adama" class="brand-image">
+                </a>
+                <a href="upl.html" class="brand-card">
+                    <img src="projectimages/UPL.jpg" alt="UPL" class="brand-image">
+                </a>
+            </div>
+            <div class="view-more">
+                <a href="shopbybrand.html" class="view-more-btn">View All Brands <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banner 2 -->
+    <section class="banner-section">
+        <div class="banner-container">
+            <div class="banner">
+                <img src="projectimages/bannerimage2.jpg" alt="Banner Image2" class="banner-img">
+                <div class="banner-content">
+                    <p class="banner-text">Farmer Choice | New Year Offers | COD Available on ₹500+</p>
+                    <a href="shop.html" class="shop-now-btn">Shop Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Products -->
+    <section class="products-section">
+        <div class="container">
+            <h2 class="section-title">All Products</h2>
+            <div class="products-grid" id="all-products-container"></div>
+            <div class="view-more">
+                <a href="allproduct.html" class="view-more-btn">View All Products <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>

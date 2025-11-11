@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | AgroME+</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #556B2F;
+            --secondary-color: #6B8E23;
+            --accent-color: #8FBC8F;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+        
+        /* Header Styles */
+        #header-container {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        /* Main Content Styles */
+        .privacy-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .privacy-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+        
+        .privacy-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Policy Section Styles */
+        .policy-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .policy-section:hover {
+            transform: translateY(-3px);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            padding: 0.5rem 0;
+        }
+        
+        .section-header h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-header i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+        
+        .section-header .toggle-icon {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+        
+        .section-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .section-content {
+            padding: 1rem 0;
+            display: none;
+        }
+        
+        .section-content.show {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .policy-section p {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #555;
+            line-height: 1.7;
+        }
+        
+        .policy-section ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+        
+        .policy-section li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .policy-section li:before {
+            content: "•";
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .highlight-box {
+            background-color: #f8f9e8;
+            border-left: 4px solid #e6d85c;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .highlight-box h3 {
+            color: #8a7e19;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .data-table th, .data-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .data-table th {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+        }
+        
+        .data-table tr:hover {
+            background-color: rgba(143, 188, 143, 0.1);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        
+        .contact-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-card i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+        
+        .contact-card h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .privacy-header h1 {
+                font-size: 2rem;
+            }
+            
+            .policy-section {
+                padding: 1.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <!-- Main Privacy Content -->
+    <div class="privacy-container">
+        <div class="privacy-header">
+            <h1><i class="fas fa-shield-alt"></i> Privacy Policy</h1>
+            <p>Last Updated: June 10, 2023</p>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>At AgroME+, we value the trust you place in us when you visit our website, make a purchase, or interact with our online services. This Privacy Policy explains how we collect, use, protect, and share your personal information in accordance with applicable privacy laws. By using our website or services, you agree to the practices described in this policy.</p>
+                
+                <div class="highlight-box">
+                    <h3>Key Points:</h3>
+                    <ul>
+                        <li>We never sell your personal information to third parties</li>
+                        <li>You have control over your data and marketing preferences</li>
+                        <li>We use industry-standard security measures to protect your information</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-database"></i> Information We Collect</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>We collect various types of information to provide you with a better and more personalized experience when shopping with us:</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Type of Data</th>
+                            <th>Examples</th>
+                            <th>When Collected</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Personal Information</td>
+                            <td>Name, email, phone, address</td>
+                            <td>Account creation, checkout</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Information</td>
+                            <td>Card details, billing info</td>
+                            <td>During purchase</td>
+                        </tr>
+                        <tr>
+                            <td>Order Information</td>
+                            <td>Products, quantities, delivery</td>
+                            <td>Order processing</td>
+                        </tr>
+                        <tr>
+                            <td>Usage Data</td>
+                            <td>IP address, browser, device</td>
+                            <td>Website interaction</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-cogs"></i> How We Use Your Information</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>The information we collect is used to improve your shopping experience, process transactions, and communicate with you:</p>
+                
+                <div class="process-steps">
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <h3>Order Processing</h3>
+                        <p>Fulfill your purchases and manage deliveries</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-headset"></i></div>
+                        <h3>Customer Support</h3>
+                        <p>Respond to your inquiries and requests</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-envelope"></i></div>
+                        <h3>Marketing</h3>
+                        <p>Send promotional offers (with consent)</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Improvements</h3>
+                        <p>Enhance our website and services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-lock"></i> Data Security</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>We implement robust security measures to protect your information:</p>
+                <ul>
+                    <li><strong>SSL Encryption:</strong> All data transmissions are encrypted</li>
+                    <li><strong>Secure Payment Processing:</strong> We never store full credit card details</li>
+                    <li><strong>Access Controls:</strong> Limited employee access to sensitive data</li>
+                    <li><strong>Regular Audits:</strong> Security assessments and updates</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h3>Your Role in Security</h3>
+                    <p>While we take extensive measures to protect your data, we recommend you:</p>
+                    <ul>
+                        <li>Use strong, unique passwords for your account</li>
+                        <li>Keep your login credentials confidential</li>
+                        <li>Log out after using shared devices</li>
+                        <li>Update your devices and browsers regularly</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-cookie-bite"></i> Cookies & Tracking</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>We use cookies and similar technologies to enhance your experience:</p>
+                
+                <div class="cookie-types">
+                    <div class="cookie-card essential">
+                        <h3>Essential Cookies</h3>
+                        <p>Required for basic site functionality</p>
+                        <div class="toggle-switch">
+                            <input type="checkbox" checked disabled>
+                            <span class="slider"></span>
+                        </div>
+                        <p class="note">Always active</p>
+                    </div>
+                    <div class="cookie-card analytics">
+                        <h3>Analytics Cookies</h3>
+                        <p>Help us improve our website</p>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="analytics-toggle" checked>
+                            <span class="slider"></span>
+                        </div>
+                    </div>
+                    <div class="cookie-card marketing">
+                        <h3>Marketing Cookies</h3>
+                        <p>Personalize ads and content</p>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="marketing-toggle">
+                            <span class="slider"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p>You can manage cookies through your browser settings, but this may affect site functionality.</p>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-share-alt"></i> Data Sharing</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>We only share your data when necessary and with appropriate safeguards:</p>
+                <ul>
+                    <li><strong>Service Providers:</strong> Payment processors, shipping carriers</li>
+                    <li><strong>Legal Requirements:</strong> When required by law</li>
+                    <li><strong>Business Transfers:</strong> In case of merger or acquisition</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h3>International Data Transfers</h3>
+                    <p>Some service providers may be located outside your country. We ensure they provide adequate data protection through contractual agreements.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-user-cog"></i> Your Rights</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>You have control over your personal information:</p>
+                
+                <div class="rights-grid">
+                    <div class="right-card">
+                        <i class="fas fa-eye"></i>
+                        <h3>Access</h3>
+                        <p>Request a copy of your data</p>
+                    </div>
+                    <div class="right-card">
+                        <i class="fas fa-edit"></i>
+                        <h3>Correction</h3>
+                        <p>Update inaccurate information</p>
+                    </div>
+                    <div class="right-card">
+                        <i class="fas fa-trash-alt"></i>
+                        <h3>Deletion</h3>
+                        <p>Request data removal</p>
+                    </div>
+                    <div class="right-card">
+                        <i class="fas fa-ban"></i>
+                        <h3>Opt-Out</h3>
+                        <p>Unsubscribe from marketing</p>
+                    </div>
+                </div>
+                
+                <p>To exercise your rights, please contact us using the information below.</p>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-child"></i> Children's Privacy</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>Our services are not directed to children under 13. We do not knowingly collect personal information from children. If we become aware of such collection, we will take steps to delete the information promptly.</p>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <div class="section-header" onclick="toggleSection(this)">
+                <h2><i class="fas fa-sync-alt"></i> Policy Updates</h2>
+                <span class="toggle-icon"><i class="fas fa-chevron-down"></i></span>
+            </div>
+            <div class="section-content">
+                <p>We may update this policy periodically. Significant changes will be notified through our website or email. We recommend reviewing this policy occasionally.</p>
+                <p><strong>Last Updated:</strong> June 10, 2023</p>
+            </div>
+        </div>
+        
+        <div class="contact-section">
+            <h2><i class="fas fa-envelope"></i> Contact Us</h2>
+            <p>For privacy-related questions or to exercise your rights:</p>
+            
+            <div class="contact-info">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Address</h3>
+                    <p>123 Farm Road<br>Agricultural Zone, Country</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h3>Email</h3>
+                    <p>privacy@agromeplus.com</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Phone</h3>
+                    <p>+1 (800) 123-4567</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Back to Top Button -->
+    <div class="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+        
+        // Toggle policy sections
+        function toggleSection(header) {
+            header.classList.toggle('active');
+            const content = header.nextElementSibling;
+            content.classList.toggle('show');
+        }
+        
+        // Open first few sections by default
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstSections = document.querySelectorAll('.policy-section:nth-child(-n+3) .section-header');
+            firstSections.forEach(header => {
+                header.classList.add('active');
+                header.nextElementSibling.classList.add('show');
+            });
+        });
+        
+        // Back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Cookie preferences toggle
+        const analyticsToggle = document.getElementById('analytics-toggle');
+        const marketingToggle = document.getElementById('marketing-toggle');
+        
+        analyticsToggle.addEventListener('change', function() {
+            // In a real implementation, this would set a cookie preference
+            console.log('Analytics cookies:', this.checked ? 'enabled' : 'disabled');
+        });
+        
+        marketingToggle.addEventListener('change', function() {
+            // In a real implementation, this would set a cookie preference
+            console.log('Marketing cookies:', this.checked ? 'enabled' : 'disabled');
+        });
+    </script>
+</body>
+</html>

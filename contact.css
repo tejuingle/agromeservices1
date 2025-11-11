@@ -1,0 +1,115 @@
+
+
+/* Responsive styling for mobile screens */
+@media (max-width: 768px) {
+    .categories-nav ul {
+        flex-direction: column;  /* Stack items vertically on small screens */
+    }
+}
+
+
+.contact-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 50px;
+}
+
+.contact-section img {
+    width: 500px;
+    height: 500px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+    margin-top: 100px;
+}
+
+.contact-section img:hover {
+    transform: scale(1.05);
+    
+}
+
+.contact-details {
+   margin: 100px;
+    align-items: center;
+}
+
+.contact-details h2:hover {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #556B2F;
+    text-align: center;
+}
+
+.contact-details div {
+    margin-bottom: 20px;
+}
+
+.contact-details h3
+{
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.contact-details p
+{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.contact-details button {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    border: none;
+    background-color: #8ab92a;
+    color: rgb(5, 4, 4);
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-details button:hover {
+    background-color: #556B2F;
+}
+
+.contact-details button i {
+    margin-right: 10px;
+}
+
+.contact-form {
+    padding: 40px 50px;
+    background-color: #f9f9f9;
+}
+
+.contact-form h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.contact-form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #556B2F;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+    background-color: #556B2F;
+}
+

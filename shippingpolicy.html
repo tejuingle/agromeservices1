@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Return and Refund Policy | Agromeplus</title>
+    <style>
+        /* Main Content Section */
+        .content {
+            padding: 40px 20px;
+            max-width: 100%;
+            margin: 20px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .content h1, .content h2 {
+            text-align: start;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .content p {
+            text-align: start;
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <!-- Main Content for Shipping Policy -->
+    <div class="content">
+        <h1>Shipping Policy</h1>
+        <p>1) We ship your order through standard courier agencies to ensure that your order reaches you in standard time (5 to 8 working days) and in good condition.</p>
+        <p>Note: If we will ship through postal service then it may take more time.</p>
+        <p>2) If your Pincode is not serviceable or we are not able to send the material, then our customer service executive will get in touch with you so you can provide us with another address and pin code.</p>
+        <p>3) If you believe that the product is not in good condition, or if the packaging is tampered with or damaged before accepting delivery of the goods, please refuse to take delivery of the package. Take some pictures of the package and write instructions to the courier (e.g., "The package is tampered or damaged in courier, so I will not accept the order"). Then send us an email at care@farme.in mentioning your order reference number and attached pictures or call our Customer Care. We will make our best efforts to ensure that a replacement delivery is made to you at the earliest.</p>
+        <p>4) Delivery time mentioned on the product, cart page, or website is estimated. Actual delivery time is based on the availability of the product, weather conditions, the address where the product is to be delivered, and courier company's rules.</p>
+        <p>5) We try our best to get your product delivered. You have purchased the product from our platform to be delivered to you, and our courier partner will try their best to deliver it. However, for some reason, if the product is not delivered or is late, and if any loss occurs to you, please note that Farme is not responsible.</p>
+        <p>6) For any issues in utilizing our services, you may contact our customer care at +91 7410139201 or mail us at agromeplus.com</p>
+    </div>
+
+    <div id="footer-container"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html>

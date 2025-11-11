@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancellation Policy | Agromeplus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #388E3C;
+            --accent-color: #8BC34A;
+            --text-color: #333;
+            --light-gray: #f5f5f5;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--light-gray);
+        }
+        
+       
+        
+        /* Main Content Styles */
+        .content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .content h1 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .policy-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+            background-color: var(--light-gray);
+            border-radius: 0 4px 4px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .policy-section:hover {
+            transform: translateX(5px);
+        }
+        
+        .policy-section h2 {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .policy-section h2 i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .policy-section p {
+            margin-bottom: 1rem;
+        }
+        
+        .policy-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .policy-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background-color: #fff8e1;
+            border-left: 4px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .highlight-box h3 {
+            color: #ff8f00;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Process Steps */
+        .process-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+        }
+        
+        .step-number {
+            background-color: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-weight: bold;
+        }
+        
+        .step h3 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq-container {
+            margin-top: 3rem;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1rem;
+            background-color: var(--light-gray);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-question:hover {
+            background-color: #e9e9e9;
+        }
+        
+        .faq-answer {
+            padding: 1rem;
+            display: none;
+            background-color: var(--white);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+ 
+
+    <!-- Main Content for Cancellation Policy -->
+    <div class="content">
+        <h1><i class="fas fa-ban"></i> Order Cancellation Policy</h1>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-info-circle"></i> General Cancellation Policy</h2>
+            <p>At Agromeplus, we understand that sometimes you may need to cancel an order. Our cancellation policy is designed to be fair to both our customers and our business operations.</p>
+            
+            <div class="highlight-box">
+                <h3>Important Note:</h3>
+                <p>For agricultural products with short shelf lives (seeds, live plants, perishable items), cancellations must be requested within 2 hours of order placement to be eligible for full refund.</p>
+            </div>
+            
+            <h3>When can you cancel an order?</h3>
+            <ul>
+                <li>Before the order has been processed for shipping</li>
+                <li>Within 24 hours of placing the order (for non-perishable items)</li>
+                <li>If there will be a significant delay in shipping (we will notify you)</li>
+            </ul>
+            
+            <h3>When can't you cancel an order?</h3>
+            <ul>
+                <li>After the order has been shipped</li>
+                <li>For custom or special order items</li>
+                <li>For perishable goods after the 2-hour cancellation window</li>
+            </ul>
+        </div>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-exchange-alt"></i> Cancellation Process</h2>
+            <p>Follow these steps to cancel your order:</p>
+            
+            <div class="process-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Contact Us</h3>
+                    <p>Email or call our customer service within the cancellation window</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Provide Details</h3>
+                    <p>Have your order number and reason for cancellation ready</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Confirmation</h3>
+                    <p>Wait for our confirmation that your cancellation has been processed</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Refund</h3>
+                    <p>If payment was made, refund will be processed within 5-15 business days</p>
+                </div>
+            </div>
+            
+            <p><strong>Note:</strong> If your order has already been shipped, you may need to follow our return process upon receiving the items.</p>
+        </div>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-money-bill-wave"></i> Refund After Cancellation</h2>
+            <p>If your cancellation request is approved, your refund will be processed based on your original payment method:</p>
+            
+            <ul>
+                <li><strong>Credit/Debit Cards:</strong> 5-10 business days</li>
+                <li><strong>Bank Transfers:</strong> 7-15 business days</li>
+                <li><strong>Digital Wallets:</strong> 3-5 business days</li>
+                <li><strong>Cash on Delivery:</strong> No refund needed as payment wasn't processed</li>
+            </ul>
+            
+            <div class="highlight-box">
+                <h3>Partial Cancellations</h3>
+                <p>For orders with multiple items where only some items are cancelled, shipping fees may not be refunded if the remaining items don't qualify for free shipping.</p>
+            </div>
+        </div>
+        
+        <div class="faq-container">
+            <h2><i class="fas fa-question-circle"></i> Cancellation FAQs</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    How do I know if my order can still be cancelled? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Check your order status in "My Account" section or contact our customer service. Generally, if your order status is "Processing" it can still be cancelled. Once it changes to "Shipped", cancellation is no longer possible.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    What if I need to cancel an order of agricultural chemicals? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>For safety reasons, cancellations of agricultural chemicals must be requested within 1 hour of ordering. After this window, we cannot cancel these orders due to special handling requirements.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Will I be charged any fees for cancellation? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>We don't charge cancellation fees, but payment gateway fees (if applicable) may not be refunded. For cash on delivery orders, there are no charges for cancellation.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    Can I cancel an order placed with a discount coupon? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Yes, but the coupon will only be reinstated if the cancellation is made within the coupon's validity period. Expired coupons cannot be reused.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    What if I cancel an order that was part of a bundle deal? <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Bundle discounts will be recalculated based on the remaining items. If the remaining items no longer qualify for the bundle discount, the prices will be adjusted to regular prices.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="policy-section">
+            <h2><i class="fas fa-headset"></i> Need Help with Cancellation?</h2>
+            <p>Our customer service team is available to assist you with order cancellations:</p>
+            <ul>
+                <li><strong>Email:</strong> cancellations@agromeplus.com</li>
+                <li><strong>Phone:</strong> +1 (800) 123-4567 (Mon-Fri, 8AM-6PM)</li>
+                <li><strong>Live Chat:</strong> Available on our website during business hours</li>
+            </ul>
+            <p>Please have your order number ready when contacting us about a cancellation.</p>
+        </div>
+    </div>
+
+ <!-- Footer Section -->
+ <div id="footer-container"></div>
+ <script>
+     fetch('footer.html')
+         .then(response => response.text())
+         .then(data => {
+             document.getElementById('footer-container').innerHTML = data;
+         })
+         .catch(error => console.error('Error loading footer:', error));
+ </script>
+
+ <div class="sticky-navbar">
+     <p>&copy; 2025 Agromeplus. All Rights Reserved. | <a href="#" style="color: white;">Privacy Policy</a> | <a href="#" style="color: white;">Terms of Service</a></p> 
+ </div>
+
+       
+    <script>
+        // Toggle FAQ items
+        function toggleFAQ(element) {
+            // Toggle active class on question
+            element.classList.toggle('active');
+            
+            // Get the answer element
+            const answer = element.nextElementSibling;
+            
+            // Toggle display of answer
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
+        }
+        
+        // Make navbar sticky on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar-container');
+            if (window.scrollY > 100) {
+                navbar.style.position = 'fixed';
+                navbar.style.top = '0';
+                navbar.style.width = '100%';
+                navbar.style.zIndex = '1000';
+            } else {
+                navbar.style.position = 'relative';
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

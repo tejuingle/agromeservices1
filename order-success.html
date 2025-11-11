@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmation - AgroMePlus</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #28a745;
+      --secondary-color: #218838;
+      --accent-color: #e74c3c;
+      --text-color: #333;
+      --light-gray: #f5f5f5;
+      --medium-gray: #ddd;
+      --dark-gray: #777;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+    
+    body {
+      background-color: #f9f9f9;
+      color: var(--text-color);
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 100px auto 50px;
+      padding: 0 20px;
+      text-align: center;
+    }
+    
+    .success-icon {
+      font-size: 80px;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+    }
+    
+    .success-title {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+    
+    .success-message {
+      font-size: 18px;
+      color: var(--dark-gray);
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    .order-details {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      padding: 30px;
+      margin-bottom: 30px;
+      text-align: left;
+    }
+    
+    .order-id {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--medium-gray);
+    }
+    
+    .detail-row:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .detail-label {
+      font-weight: 500;
+      color: var(--dark-gray);
+    }
+    
+    .detail-value {
+      font-weight: 600;
+    }
+    
+    .action-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+    
+    .btn {
+      padding: 12px 30px;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .btn-outline {
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+    }
+    
+    .btn-outline:hover {
+      background-color: rgba(40, 167, 69, 0.1);
+    }
+    
+    @media (max-width: 576px) {
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Include Header -->
+  <div id="header-container"></div>
+  
+  <div class="container">
+    <div class="success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
+    
+    <h1 class="success-title">Order Placed Successfully!</h1>
+    <p class="success-message">Thank you for your purchase. Your order has been confirmed and will be processed shortly.</p>
+    
+    <div class="order-details" id="order-details">
+      <!-- Order details will be dynamically inserted here -->
+    </div>
+    
+    <div class="action-buttons">
+      <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+      <a href="#" class="btn btn-outline" id="view-order-btn">View Order Details</a>
+    </div>
+  </div>
+  
+  <!-- Include Footer -->
+  <div id="footer-container"></div>
+  
+  <script>
+    // Load header and footer
+    document.addEventListener('DOMContentLoaded', function() {
+      fetch('header.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('header-container').innerHTML = data;
+        });
+      
+      fetch('footer.html')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('footer-container').innerHTML = data;
+        })
+        .then(() => {
+          // Display order details
+          const orderData = JSON.parse(localStorage.getItem('orderData'));
+          const orderDetails = document.getElementById('order-details');
+          
+          if (!orderData) {
+            window.location.href = 'shop.html';
+            return;
+          }
+          
+          orderDetails.innerHTML = `
+            <div class="order-id">Order ID: ${orderData.orderId}</div>
+            <div class="detail-row">
+              <span class="detail-label">Date:</span>
+              <span class="detail-value">${new Date(orderData.orderDate).toLocaleDateString()}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Payment Method:</span>
+              <span class="detail-value">${orderData.paymentMethod}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Shipping To:</span>
+              <span class="detail-value">${orderData.shipping}</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Total Amount:</span>
+              <span class="detail-value">₹${orderData.total.toFixed(2)}</span>
+            </div>
+          `;
+          
+          // Set up the view order button
+          document.getElementById('view-order-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            // Save the order data to localStorage for the order details page
+            localStorage.setItem('currentOrder', JSON.stringify(orderData));
+            window.location.href = 'order-details.html';
+          });
+          
+          // Clear cart after successful order
+          localStorage.removeItem('cart');
+          localStorage.removeItem('checkoutData');
+          
+          // Update cart count in header
+          if (typeof updateCartCount === 'function') {
+            updateCartCount();
+          }
+        });
+    });
+  </script>
+</body>
+</html>

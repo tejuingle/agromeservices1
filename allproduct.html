@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - AgroChem Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        /* Main Content Section */
+        .main-content {
+            margin-top: 35px;
+            padding: 20px;
+            margin-bottom: 5%;
+        }
+        
+        /* Title Section */
+        .all-products-title {
+            text-align: center;
+            color: #556B2F; /* Dark Olive Green */
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Product Container */
+        #featured-products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Product Item */
+        .product-item {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-align: start;
+            position: relative;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+        }
+        
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Product Image */
+        .product-image-container {
+            position: relative;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .product-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+            mix-blend-mode: multiply;
+        }
+        
+        .product-item:hover .product-image-container img {
+            transform: scale(1.05);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #556B2F;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+        
+        .wishlist-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            z-index: 2;
+        }
+        
+        .product-item:hover .wishlist-btn {
+            opacity: 1;
+        }
+        
+        .wishlist-btn:hover {
+            background: #fff;
+            color: #e74c3c;
+        }
+        
+        .wishlist-btn.active {
+            color: #e74c3c;
+            opacity: 1;
+        }
+        
+        /* Product Details */
+        .product-details {
+            padding: 5px;
+        }
+        
+        .product-name {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .brand-name {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        
+        .price-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .price {
+            color: #999;
+            font-size: 14px;
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+        
+        .final-price {
+            color: #2c3e50;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .savings {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        
+        /* View Details Button */
+        .view-details-button {
+            background: #556B2F;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .view-details-button:hover {
+            background: #3D4D21;
+            transform: translateY(-2px);
+        }
+        
+        .view-details-button i {
+            margin-right: 5px;
+        }
+        
+        /* Quick View Button */
+        .quick-view-btn {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(85, 107, 47, 0.9);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        
+        .product-item:hover .quick-view-btn {
+            opacity: 1;
+        }
+        
+        .quick-view-btn:hover {
+            background: rgba(61, 77, 33, 0.9);
+        }
+        
+        /* View More Button */
+        .view-more-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        
+        #view-more-btn {
+            background: #556B2F;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        #view-more-btn:hover {
+            background: #3D4D21;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Quick View Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            overflow: auto;
+        }
+        
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            animation: modalFadeIn 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        @keyframes modalFadeIn {
+            from {opacity: 0; transform: translateY(-50px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #7f8c8d;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: #333;
+        }
+        
+        .modal-product-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .modal-product-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .modal-product-image img {
+            max-width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+        }
+        
+        .modal-product-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .modal-product-title {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .modal-product-brand {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+        
+        .modal-price-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-original-price {
+            font-size: 18px;
+            color: #999;
+            text-decoration: line-through;
+            margin-right: 15px;
+        }
+        
+        .modal-final-price {
+            font-size: 24px;
+            color: #2c3e50;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .modal-discount-badge {
+            background-color: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .modal-product-description {
+            margin-bottom: 20px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .modal-product-features {
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .feature-list li {
+            margin-bottom: 5px;
+            position: relative;
+            padding-left: 20px;
+            color: #555;
+        }
+        
+        .feature-list li:before {
+            content: "•";
+            color: #556B2F;
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .modal-actions {
+            margin-top: 25px;
+        }
+        
+        .modal-view-details {
+            background: #556B2F;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .modal-view-details:hover {
+            background: #3D4D21;
+        }
+        
+        .modal-view-details i {
+            margin-right: 8px;
+        }
+        
+        /* Filter Section */
+        .filter-section {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            padding: 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .filter-label {
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .filter-select {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            cursor: pointer;
+            min-width: 150px;
+            font-size: 14px;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #556B2F;
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .notification i {
+            margin-right: 10px;
+        }
+        
+        /* No Products Message */
+        .no-products {
+            text-align: center;
+            grid-column: 1 / -1;
+            padding: 40px;
+            color: #7f8c8d;
+            font-size: 18px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+            }
+        
+            #featured-products-container {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+            
+            .modal-product-details {
+                flex-direction: column;
+            }
+            
+            .modal-product-image,
+            .modal-product-info {
+                min-width: 100%;
+            }
+            
+            .filter-section {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .filter-select {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #featured-products-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                padding: 15px;
+            }
+            
+            .modal-product-image {
+                padding: 10px;
+            }
+        }
+    </style>        
+</head>
+<body>
+    <!-- Include Header File -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                });
+        </script>
+    </div>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="content-container">
+            <!-- Title Section -->
+            <div class="title-section">
+                <h2 class="all-products-title">AgroChem Products</h2>
+            </div>
+            
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <span class="filter-label">Sort by:</span>
+                    <select id="sort-select" class="filter-select">
+                        <option value="default">Default</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="discount">Discount</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">Category:</span>
+                    <select id="category-select" class="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="Insecticide">Insecticide</option>
+                        <option value="Fungicide">Fungicide</option>
+                        <option value="Herbicide">Herbicide</option>
+                        <option value="Plant Growth Regulator">Plant Growth Regulator</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <span class="filter-label">Brand:</span>
+                    <select id="brand-select" class="filter-select">
+                        <option value="all">All Brands</option>
+                        <option value="Bayer">Bayer</option>
+                        <option value="Adama">Adama</option>
+                        <option value="BASF">BASF</option>
+                        <option value="Indofil">Indofil</option>
+                        <option value="HPM">HPM</option>
+                        <option value="Rallis">Rallis</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Container -->
+            <div class="product-container" id="featured-products-container"></div>
+
+            <!-- View More Button -->
+            <div class="view-more-container">
+                <button id="view-more-btn">View More Products <i class="fas fa-chevron-down"></i></button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Quick View Modal -->
+    <div id="quickViewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-product-details">
+                <div class="modal-product-image">
+                    <img id="modal-product-image" src="" alt="">
+                </div>
+                <div class="modal-product-info">
+                    <h2 class="modal-product-title" id="modal-product-name"></h2>
+                    <p class="modal-product-brand" id="modal-product-brand"></p>
+                    
+                    <div class="modal-price-container">
+                        <span class="modal-original-price" id="modal-original-price"></span>
+                        <span class="modal-final-price" id="modal-final-price"></span>
+                        <span class="modal-discount-badge" id="modal-discount-badge"></span>
+                    </div>
+                    
+                    <div class="modal-product-description">
+                        <div class="feature-title">Description:</div>
+                        <p id="modal-product-description"></p>
+                    </div>
+                    
+                    <div class="modal-product-features" id="modal-product-features">
+                        <!-- Features will be added dynamically -->
+                    </div>
+                    
+                    <div class="modal-actions">
+                        <button class="modal-view-details" id="modal-view-details">
+                            <i class="fas fa-eye"></i> View Product Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message">Product added to wishlist!</span>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+    <script>
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+
+    
+    <script type="module">
+        // Import your products data
+        import { products } from './data1/data.js';
+
+        const PRODUCTS_PER_PAGE = 12;
+        let displayedProducts = 0;
+        let currentProducts = [...products];
+        let currentQuickViewProduct = null;
+        
+        const productsContainer = document.getElementById('featured-products-container');
+        const viewMoreBtn = document.getElementById('view-more-btn');
+        const cartQuantityElement = document.getElementById('cart-quantity');
+        const sortSelect = document.getElementById('sort-select');
+        const categorySelect = document.getElementById('category-select');
+        const brandSelect = document.getElementById('brand-select');
+        const quickViewModal = document.getElementById('quickViewModal');
+        const closeModal = document.querySelector('.close-modal');
+        const notification = document.getElementById('notification');
+        const notificationMessage = document.getElementById('notification-message');
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayProducts();
+            updateCartQuantity();
+            
+            // Load wishlist status from localStorage
+            const wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            products.forEach(product => {
+                product.inWishlist = wishlist.includes(product.id);
+            });
+            
+            // Set up event listeners
+            sortSelect.addEventListener('change', filterAndSortProducts);
+            categorySelect.addEventListener('change', filterAndSortProducts);
+            brandSelect.addEventListener('change', filterAndSortProducts);
+            closeModal.addEventListener('click', () => quickViewModal.style.display = 'none');
+            window.addEventListener('click', (e) => {
+                if (e.target === quickViewModal) {
+                    quickViewModal.style.display = 'none';
+                }
+            });
+        });
+        
+        function filterAndSortProducts() {
+            const sortValue = sortSelect.value;
+            const categoryValue = categorySelect.value;
+            const brandValue = brandSelect.value;
+            
+            // Filter products
+            let filteredProducts = [...products];
+            
+            if (categoryValue !== 'all') {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.category === categoryValue
+                );
+            }
+            
+            if (brandValue !== 'all') {
+                filteredProducts = filteredProducts.filter(product => 
+                    product.brandName === brandValue
+                );
+            }
+            
+            // Sort products
+            switch(sortValue) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => {
+                        const priceA = a.originalPrice * (1 - a.discountPercentage / 100);
+                        const priceB = b.originalPrice * (1 - b.discountPercentage / 100);
+                        return priceA - priceB;
+                    });
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => {
+                        const priceA = a.originalPrice * (1 - a.discountPercentage / 100);
+                        const priceB = b.originalPrice * (1 - b.discountPercentage / 100);
+                        return priceB - priceA;
+                    });
+                    break;
+                case 'discount':
+                    filteredProducts.sort((a, b) => b.discountPercentage - a.discountPercentage);
+                    break;
+                default:
+                    // Default sorting (by ID)
+                    filteredProducts.sort((a, b) => a.id.localeCompare(b.id));
+            }
+            
+            currentProducts = filteredProducts;
+            displayedProducts = 0;
+            productsContainer.innerHTML = '';
+            
+            if (currentProducts.length === 0) {
+                showNoProductsMessage();
+            } else {
+                displayProducts();
+            }
+        }
+        
+        function showNoProductsMessage() {
+            productsContainer.innerHTML = `
+                <div class="no-products">
+                    <i class="fas fa-search" style="font-size: 40px; margin-bottom: 15px;"></i>
+                    <p>No products found matching your filters.</p>
+                    <button onclick="resetFilters()" style="margin-top: 15px; background: #556B2F; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;">
+                        Reset Filters
+                    </button>
+                </div>
+            `;
+            viewMoreBtn.style.display = 'none';
+        }
+        
+        function resetFilters() {
+            sortSelect.value = 'default';
+            categorySelect.value = 'all';
+            brandSelect.value = 'all';
+            filterAndSortProducts();
+        }
+        
+        window.resetFilters = resetFilters;
+        
+        function displayProducts() {
+            const nextProducts = currentProducts.slice(displayedProducts, displayedProducts + PRODUCTS_PER_PAGE);
+            displayedProducts += nextProducts.length;
+        
+            nextProducts.forEach(product => {
+                const finalPrice = (product.originalPrice - (product.originalPrice * product.discountPercentage / 100)).toFixed(2);
+                const savings = (product.originalPrice * product.discountPercentage / 100).toFixed(2);
+                
+                const productHTML = `
+                    <div class="product-item" data-id="${product.id}">
+                        <div class="product-image-container">
+                            <img src="${product.imageSrc}" alt="${product.name}">
+                            <div class="discount-badge">-${product.discountPercentage}%</div>
+                            <div class="category-badge">${product.category}</div>
+                            <button class="wishlist-btn ${product.inWishlist ? 'active' : ''}" data-product="${product.id}">
+                                <i class="fas fa-heart"></i>
+                            </button>
+                            <button class="quick-view-btn" data-product="${product.id}">Quick View</button>
+                        </div>
+                        <div class="product-details">
+                            <h3 class="product-name" title="${product.name}">${product.name}</h3>
+                            <p class="brand-name">${product.brandName}</p>
+                            
+                            <div class="price-container">
+                                <span class="price">₹${product.originalPrice.toFixed(2)}</span>
+                                <span class="final-price">₹${finalPrice}</span>
+                                <span class="savings">Save ₹${savings}</span>
+                            </div>
+                            
+                            <button class="view-details-button" data-product="${product.id}">
+                                <i class="fas fa-eye"></i> View Details
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productsContainer.innerHTML += productHTML;
+            });
+        
+            if (displayedProducts >= currentProducts.length) {
+                viewMoreBtn.style.display = 'none';
+            } else {
+                viewMoreBtn.style.display = 'block';
+            }
+            
+            // Add event listeners to the newly created elements
+            addProductEventListeners();
+        }
+        
+        function addProductEventListeners() {
+            // Wishlist buttons
+            document.querySelectorAll('.wishlist-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const productId = this.dataset.product;
+                    toggleWishlist(productId, this);
+                });
+            });
+            
+            // Quick view buttons
+            document.querySelectorAll('.quick-view-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const productId = this.dataset.product;
+                    showQuickView(productId);
+                });
+            });
+            
+            // View details buttons
+            document.querySelectorAll('.view-details-button').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const productId = this.dataset.product;
+                    navigateToProductPage(productId);
+                });
+            });
+            
+            // Product item click (navigate to product detail page)
+            document.querySelectorAll('.product-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const productId = this.dataset.id;
+                    navigateToProductPage(productId);
+                });
+            });
+        }
+        
+        function navigateToProductPage(productId) {
+            window.location.href = `product.html?id=${productId}`;
+        }
+        
+        function toggleWishlist(productId, button) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            product.inWishlist = !product.inWishlist;
+            
+            if (button) {
+                button.classList.toggle('active');
+            }
+            
+            // Update localStorage
+            let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+            
+            if (product.inWishlist) {
+                if (!wishlist.includes(productId)) {
+                    wishlist.push(productId);
+                }
+            } else {
+                wishlist = wishlist.filter(id => id !== productId);
+            }
+            
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            
+            // Show notification
+            showNotification(
+                product.inWishlist 
+                    ? `${product.name} added to wishlist!` 
+                    : `${product.name} removed from wishlist!`
+            );
+        }
+        
+        function showQuickView(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            currentQuickViewProduct = product;
+            const finalPrice = (product.originalPrice - (product.originalPrice * product.discountPercentage / 100)).toFixed(2);
+            
+            // Populate modal with product data
+            document.getElementById('modal-product-image').src = product.imageSrc;
+            document.getElementById('modal-product-name').textContent = product.name;
+            document.getElementById('modal-product-brand').textContent = `Brand: ${product.brandName}`;
+            document.getElementById('modal-original-price').textContent = `₹${product.originalPrice.toFixed(2)}`;
+            document.getElementById('modal-final-price').textContent = `₹${finalPrice}`;
+            document.getElementById('modal-discount-badge').textContent = `Save ${product.discountPercentage}%`;
+            
+            // Format and display description
+            let description = product.description;
+            // Remove extra whitespace and newlines
+            description = description.replace(/\n\s*\n/g, '\n').trim();
+            document.getElementById('modal-product-description').textContent = description;
+            
+            // Clear previous features
+            const featuresContainer = document.getElementById('modal-product-features');
+            featuresContainer.innerHTML = '';
+            
+            // Add any additional features if they exist in the product data
+            if (product.modeOfAction || product.features || product.cropAndDiseases || product.dosage) {
+                if (product.modeOfAction) {
+                    addFeatureSection('Mode of Action', product.modeOfAction);
+                }
+                if (product.features) {
+                    addFeatureSection('Features', product.features);
+                }
+                if (product.cropAndDiseases) {
+                    addFeatureSection('Recommended Crops & Diseases', product.cropAndDiseases);
+                }
+                if (product.dosage) {
+                    addFeatureSection('Dosage', product.dosage);
+                }
+            }
+            
+            function addFeatureSection(title, content) {
+                const section = document.createElement('div');
+                section.className = 'modal-product-features-section';
+                section.innerHTML = `
+                    <div class="feature-title">${title}:</div>
+                    <div class="feature-content">${formatContent(content)}</div>
+                `;
+                featuresContainer.appendChild(section);
+            }
+            
+            function formatContent(content) {
+                // If content is an array, convert it to a list
+                if (Array.isArray(content)) {
+                    return `<ul class="feature-list">${
+                        content.map(item => `<li>${item}</li>`).join('')
+                    }</ul>`;
+                }
+                // If content has bullet points in text, convert them to list items
+                else if (typeof content === 'string' && content.includes('•')) {
+                    const items = content.split('•').filter(item => item.trim() !== '');
+                    return `<ul class="feature-list">${
+                        items.map(item => `<li>${item.trim()}</li>`).join('')
+                    }</ul>`;
+                }
+                // Otherwise just return the content as is
+                return content;
+            }
+            
+            // Set up view details button in modal
+            const modalViewDetails = document.getElementById('modal-view-details');
+            modalViewDetails.onclick = function() {
+                navigateToProductPage(product.id);
+                quickViewModal.style.display = 'none';
+            };
+            
+            // Show the modal
+            quickViewModal.style.display = 'block';
+        }
+        
+        function updateCartQuantity() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+            if (cartQuantityElement) {
+                cartQuantityElement.textContent = totalQuantity;
+            }
+        }
+        
+        function showNotification(message) {
+            notificationMessage.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        viewMoreBtn.addEventListener('click', displayProducts);
+        
+        // Initialize filters
+        filterAndSortProducts();
+    </script>
+</body>
+</html>

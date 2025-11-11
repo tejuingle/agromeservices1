@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Agroomeplus Fertiliser Company</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        :root {
+            --primary-green: #4a6f28;
+            --secondary-green: #6B8E23;
+            --accent-gold: #FFD700;
+            --light-bg: #f9f9f9;
+            --dark-text: #333;
+            --light-text: #777;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* Banner Section */
+        .banner {
+            background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('projectimages/farm-field.jpg') center/cover no-repeat;
+            opacity: 0.2;
+            z-index: 0;
+        }
+
+        .banner-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .banner-content h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .shop-btn {
+            background-color: var(--accent-gold);
+            color: var(--dark-text);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease 0.6s both;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shop-btn:hover {
+            background-color: #e6c200;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        /* About Section */
+        .about-section {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin: 50px auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: url('projectimages/leaf-pattern.png') center/contain no-repeat;
+            opacity: 0.05;
+            z-index: 0;
+        }
+
+        .about-img-container {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            min-height: 500px;
+            background: url('projectimages/aboutuspageimage.jpg') center/cover no-repeat;
+        }
+
+        .about-img-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .about-text {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-text h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-green);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about-text h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+
+        .about-text p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--dark-text);
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .about-text p:nth-child(2) { animation-delay: 0.2s; }
+        .about-text p:nth-child(3) { animation-delay: 0.4s; }
+        .about-text p:nth-child(4) { animation-delay: 0.6s; }
+        .about-text p:nth-child(5) { animation-delay: 0.8s; }
+        .about-text p:nth-child(6) { animation-delay: 1.0s; }
+        .about-text p:nth-child(7) { animation-delay: 1.2s; }
+        .about-text p:nth-child(8) { animation-delay: 1.4s; }
+        .about-text p:nth-child(9) { animation-delay: 1.6s; }
+
+        .about-text strong {
+            color: var(--primary-green);
+            font-weight: 600;
+        }
+
+        /* Mission/Vision Cards */
+        .values-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            text-align: center;
+            border-top: 4px solid var(--primary-green);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 20px;
+        }
+
+        .value-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-green);
+        }
+
+        .value-card p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+        }
+
+        /* Team Section */
+        .team-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .team-section h2 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .team-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .team-member {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .team-info {
+            padding: 20px;
+        }
+
+        .team-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary-green);
+        }
+
+        .team-info p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--primary-green);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: linear-gradient(rgba(74, 111, 40, 0.9), rgba(74, 111, 40, 0.9)), url('projectimages/farm-field-2.jpg') center/cover no-repeat;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            padding: 30px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-section {
+                flex-direction: column;
+                padding: 30px;
+            }
+
+            .about-img-container {
+                width: 100%;
+                min-height: 400px;
+            }
+
+            .banner-content h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .banner {
+                padding: 60px 20px;
+            }
+
+            .banner-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .about-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .banner-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .banner-content p {
+                font-size: 1rem;
+            }
+
+            .about-section {
+                padding: 20px;
+                margin: 30px auto;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <div id="header-container">
+        <div id="header"></div>
+        <script>
+            // Fetch and insert the header dynamically
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('header').innerHTML = data;
+                })
+                .catch(error => console.error('Error loading header:', error));
+        </script>
+    </div>
+
+    <!-- Banner Section -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1>Growing Together With Agroomeplus</h1>
+            <p>Discover our commitment to sustainable agriculture and high-quality fertiliser solutions</p>
+            <a href="shop.html"><button class="shop-btn"><i class="fas fa-shopping-cart"></i> Explore Products</button></a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <div class="about-img-container"></div>
+        <div class="about-text">
+            <h1>About Agroomeplus Fertiliser Company</h1>
+            <p>Welcome to Agroomeplus Fertiliser Company, your trusted partner in agricultural excellence. At Agroomeplus, we are committed to empowering farmers and agricultural businesses with high-quality fertilisers and innovative solutions to enhance crop productivity, soil health, and sustainable farming practices.</p>
+            <p>With years of expertise in the agricultural industry, Agroomeplus has established itself as a leading provider of a comprehensive range of fertilisers, including organic, inorganic, liquid, and specialty fertilisers tailored to meet the diverse needs of modern farming.</p>
+            <p><strong>Our Mission:</strong> To support global food security by providing farmers with reliable, eco-friendly, and scientifically advanced fertiliser solutions. We strive to promote sustainable agriculture while helping farmers maximize their profitability and minimize environmental impact.</p>
+            <p><strong>Our Vision:</strong> To be a global leader in the fertiliser industry, recognized for our innovation, quality, and commitment to sustainable farming practices. We envision a future where every farmer has access to the tools and knowledge needed to thrive.</p>
+            <p><strong>Our Products:</strong> Agroomeplus offers a wide range of fertilisers, including organic fertilisers enriched with natural ingredients, inorganic fertilisers formulated with essential nutrients, liquid fertilisers for quick absorption, and specialty fertilisers customized for specific crops.</p>
+            <p><strong>Why Choose Agroomeplus?</strong> We guarantee quality assurance with rigorously tested products, expert support from our team of agronomists, a commitment to sustainability, and continuous innovation through research and development.</p>
+            <p>At Agroomeplus, we believe that the future of agriculture lies in the balance between productivity and sustainability. Join us in our mission to cultivate a greener, more prosperous world.</p>
+            <p><strong>Agroomeplus Fertiliser Company – Nourishing Growth, Sustaining Life.</strong></p>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <h3>Our Mission</h3>
+                <p>To revolutionize agriculture through innovative fertiliser solutions that increase yields while protecting our planet for future generations.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Our Vision</h3>
+                <p>To be the most trusted name in agricultural solutions, transforming farming practices across the globe through sustainable innovation.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Our Values</h3>
+                <p>Sustainability, Innovation, Integrity, and Farmer Success guide every decision we make and every product we develop.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number" id="years-exp">0</div>
+                <div class="stat-label">Years of Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="happy-farmers">0</div>
+                <div class="stat-label">Happy Farmers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="products">0</div>
+                <div class="stat-label">Quality Products</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="countries">0</div>
+                <div class="stat-label">Countries Served</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2>Meet Our Leadership Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="projectimages/team1.jpg" alt="CEO" class="team-img">
+                <div class="team-info">
+                    <h3>Gajanan Mogal</h3>
+                    <p>Founder & CEO</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="projectimages/team2.jpg" alt="CTO" class="team-img">
+                <div class="team-info">
+                    <h3>Tejaswini Ingle</h3>
+                    <p>Co-Founder & Chief Technology Officer</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+   
+    </section>
+
+    <!-- Footer Section -->
+    <div id="footer-container"></div>
+    <script>
+        // Fetch and insert the footer dynamically
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Counter animation for stats
+        function animateCounters() {
+            const counters = [
+                { element: 'years-exp', target: 15, duration: 2000 },
+                { element: 'happy-farmers', target: 2500, duration: 2000, prefix: '+' },
+                { element: 'products', target: 120, duration: 2000, prefix: '+' },
+                { element: 'countries', target: 8, duration: 2000 }
+            ];
+
+            counters.forEach(counter => {
+                const element = document.getElementById(counter.element);
+                const target = counter.target;
+                const duration = counter.duration;
+                const step = target / (duration / 16); // 60fps
+                let current = 0;
+
+                const interval = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        clearInterval(interval);
+                        current = target;
+                    }
+                    element.textContent = counter.prefix ? counter.prefix + Math.floor(current) : Math.floor(current);
+                }, 16);
+            });
+        }
+
+        // Intersection Observer to trigger animations when scrolled to
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        observer.observe(document.querySelector('.stats-section'));
+
+        // Animate paragraphs on scroll
+        const textObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.about-text p').forEach(p => {
+            textObserver.observe(p);
+        });
+    </script>
+</body>
+</html>

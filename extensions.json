@@ -1,0 +1,19 @@
+{
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact", 
+      "vue-html": "html", 
+      "plaintext": "html"
+    },
+    "emmet.syntaxProfiles": {
+      "html": {
+        "inline_break": 2,
+        "self_closing_tag": true
+      }
+    },
+    "emmet.variables": {
+      "lang": "en"
+    },
+    "files.associations": {"*html": "html"},
+    "emmet.triggerExpansionOnTab": true
+  }
+  
